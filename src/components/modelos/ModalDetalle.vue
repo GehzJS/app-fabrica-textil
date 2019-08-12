@@ -1,0 +1,119 @@
+<template>
+    <div>
+        <v-layout row justify-center>
+            <v-dialog v-model="modal.detalle" fullscreen hide-overlay transition="dialog-bottom-transition">
+                <v-card class="mx-auto">
+                    <v-img src="https://cdn.vuetifyjs.com/images/lists/ali.png" height="300px">
+                        <v-layout column fill-height>
+                            <v-card-title>
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on }">
+                                        <v-btn icon @click="modalDetalleModelo({modelo: null, estado: false})" v-on="on">
+                                            <v-icon>chevron_left</v-icon>
+                                        </v-btn>
+                                    </template>
+                                    <span>Regresar</span>
+                                </v-tooltip>
+                            </v-card-title>
+                            <v-card-title class="white--text pl-7 pt-12">
+                                <div class="display-1 pl-7 pt-12">{{modelo.nombre}}</div>
+                            </v-card-title>
+                        </v-layout>
+                    </v-img>
+                    <v-container fluid>
+                        <v-list>
+                            <v-list-item>
+                                <v-list-item-icon>
+                                    <v-icon color="secondary">shopping_basket</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    <v-list-item-title>
+                                        <span class="font-weight-bold">Nombre del modelo: </span>
+                                        <span class="text-capitalize">{{modelo.nombre}}</span>
+                                    </v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-divider inset></v-divider>
+                            <v-list-item>
+                                <v-list-item-icon>
+                                    <v-icon color="secondary">bookmark</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    <v-list-item-title>
+                                        <span class="font-weight-bold">Tipo de modelo: </span>
+                                        <span class="text-capitalize">{{modelo.tipo}}</span>
+                                    </v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-divider inset></v-divider>
+                            <v-list-item>
+                                <v-list-item-icon>
+                                    <v-icon color="secondary">dashboard</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    <v-list-item-title>
+                                        <span class="font-weight-bold">Talla del modelo: </span>
+                                        <span class="text-capitalize">{{modelo.talla}}</span>
+                                    </v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-divider inset></v-divider>
+                            <v-list-item>
+                                <v-list-item-icon>
+                                    <v-icon color="secondary">assignment</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    <v-list-item-title>
+                                        <span class="font-weight-bold">Descripción del modelo: </span>
+                                        <span class="text-capitalize">{{modelo.descripcion}}</span>
+                                    </v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-divider inset></v-divider>
+                            <v-list-item>
+                                <v-list-item-icon>
+                                    <v-icon color="secondary">date_range</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    <v-list-item-title>
+                                        <span class="font-weight-bold">Registrado desde: </span>
+                                        <span class="text-capitalize">{{modelo.registro}}</span>
+                                    </v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                    </v-container>
+                </v-card>
+            </v-dialog>
+        </v-layout>
+    </div>
+</template>
+<script>
+import { mapState, mapMutations, mapActions } from 'vuex';
+import { ModeloService } from '@/services/ModeloService.js';
+
+const modeloService = new ModeloService();
+
+export default {
+    name: 'ModalDetalleModelos',
+    computed: {
+        ...mapState('general', {
+            tema: state => state.tema,
+            modal: state => state.modal
+        }),
+        ...mapState('modelos', {
+            modelo: state => state.modelo
+        })
+    },
+    methods: {
+        ...mapActions('modelos', {
+            modalDetalleModelo: 'modalDetalleModelo'
+        })
+    },
+}
+</script>
+<style>
+.v-sheet {
+    width: 100%;
+}
+</style>
