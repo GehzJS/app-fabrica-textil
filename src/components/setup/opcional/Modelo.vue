@@ -45,17 +45,13 @@ export default {
     name: 'ModeloInicio',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // precio: '##.##'
+            valido: true
         }
     },
     computed: {
         ...mapState('general', {
-            nombre: state => state.nombre,
             cantidad: state => state.cantidad,
-            precio: state => state.precio,
+            precio: state => state.precio
         }),
         ...mapFields('setup', [
             'modelo',

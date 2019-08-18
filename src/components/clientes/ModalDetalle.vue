@@ -24,7 +24,7 @@
                         <v-list>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">person</v-icon>
+                                    <v-icon color="error">person</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -36,7 +36,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">people</v-icon>
+                                    <v-icon color="error">people</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -48,7 +48,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">people</v-icon>
+                                    <v-icon color="error">people</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -60,7 +60,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">email</v-icon>
+                                    <v-icon color="error">email</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -72,7 +72,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">call</v-icon>
+                                    <v-icon color="error">call</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -84,7 +84,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">date_range</v-icon>
+                                    <v-icon color="error">date_range</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -102,15 +102,11 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { ClienteService } from '@/services/ClienteService.js';
-
-const clienteService = new ClienteService();
 
 export default {
     name: 'ModalDetalleClientes',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal
         }),
         ...mapState('clientes', {

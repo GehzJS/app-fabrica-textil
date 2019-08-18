@@ -18,7 +18,7 @@
                                         <v-text-field outlined rounded clearable v-model="lote.cantidad" label="Cantidad *" prepend-inner-icon="speaker_notes" hint="Ejemplo: 10 (Cantidad de modelos por lote)." v-validate="'required|numeric|min:1|max:5'" :counter="5" :error-messages="errors.collect('cantidad')" data-vv-name="cantidad" required></v-text-field>
                                     </v-flex>
                                     <v-flex xs6>
-                                        <v-autocomplete outlined rounded v-model="lote.modelo_id" :items="modelos" item-text="nombreModelo" item-value="id" label="Modelo *" prepend-inner-icon="shopping_basket" v-validate="'required'" :error-messages="errors.collect('modelo')" data-vv-name="modelo" required></v-autocomplete>
+                                        <v-autocomplete outlined rounded v-model="lote.modelo_id" :items="modelos" item-text="nombre_modelo" item-value="id" label="Modelo *" prepend-inner-icon="shopping_basket" v-validate="'required'" :error-messages="errors.collect('modelo')" data-vv-name="modelo" required></v-autocomplete>
                                     </v-flex>
                                     <v-flex xs12>
                                         <v-textarea outlined rounded clearable rows="1" auto-grow v-model="lote.descripcion" label="Descripción *" prepend-inner-icon="assignment" hint="Ejemplo: Lote del modelo X." v-validate="'required|alpha_spaces|min:10|max:256'" :counter="256" :error-messages="errors.collect('descripcion')" data-vv-name="descripcion" required></v-textarea>
@@ -48,18 +48,12 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { LoteService } from '@/services/LoteService.js';
-
-const loteService = new LoteService();
 
 export default {
     name: 'ModalGuardarLotes',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // precio: '##.##'
+            valido: true
         }
     },
     computed: {
@@ -67,24 +61,15 @@ export default {
             'lote',
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
-            nombre: state => state.nombre,
             cantidad: state => state.cantidad
         }),
         ...mapState('lotes', {
             lotes: state => state.lotes,
-            modelos: state => state.modelos,
-            maquinas: state => state.maquinas
+            modelos: state => state.modelos
         })
     },
     methods: {
-        ...mapMutations('lotes', {
-            asignarLote: 'asignarLote',
-            limpiarLote: 'limpiarLote'
-        }),
         ...mapActions('lotes', {
             modalGuardarLote: 'modalGuardarLote',
             guardarLote: 'guardarLote',

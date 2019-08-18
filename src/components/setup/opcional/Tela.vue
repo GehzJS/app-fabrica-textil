@@ -28,7 +28,7 @@
                                 <v-layout align-start justify-center fill-height>
                                     <v-flex xs12>
                                         <h4 class="subtitle-1">
-                                            <v-icon left>color_lens</v-icon>Seleccione un color *
+                                            <v-icon left>color_lens</v-icon>Color *
                                         </h4>
                                         <v-color-picker v-model="tela.color" flat hide-canvas hide-inputs hide-mode-switch show-swatches swatches-max-height="65" mode="hexa" v-validate="'required'" :error-messages="errors.collect('tela')" data-vv-name="tela" required></v-color-picker>
                                     </v-flex>
@@ -56,20 +56,16 @@ export default {
     name: 'TelaInicio',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // precio: '##.##'
+            valido: true
         }
     },
     computed: {
         ...mapState('general', {
-            nombre: state => state.nombre,
             cantidad: state => state.cantidad,
             precio: state => state.precio,
         }),
         ...mapFields('setup', [
-            'tela',
+            'tela'
         ])
     },
     methods: {

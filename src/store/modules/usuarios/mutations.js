@@ -34,7 +34,7 @@ export default {
     asignarEmpleados(state, payload) {
         state.empleados.push({
             id: payload.id,
-            nombreEmpleado: payload.nombre
+            nombre_empleado: payload.nombre
         });
     }
 };

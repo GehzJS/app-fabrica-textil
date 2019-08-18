@@ -54,49 +54,27 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { ProveedorService } from '@/services/ProveedorService.js';
-
-const proveedorService = new ProveedorService();
 
 export default {
     name: 'ModalGuardarProveedores',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // telefono: '###-###-####'
+            valido: true
         }
     },
     computed: {
         ...mapFields('proveedores', [
-                'proveedor',
-            ]
-            // {
-            //     proveedor: 'proveedor.proveedor',
-            //     contrasena: 'proveedor.contrasena',
-            //     rol: 'proveedor.rol',
-            //     proveedor: 'proveedor.proveedor_id'
-            // }
-        ),
+                'proveedor'
+            ]),
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
-            nombre: state => state.nombre,
             telefono: state => state.telefono
         }),
         ...mapState('proveedores', {
-            proveedores: state => state.proveedores,
-            cargos: state => state.cargos
+            proveedores: state => state.proveedores
         })
     },
     methods: {
-        ...mapMutations('proveedores', {
-            asignarProveedor: 'asignarProveedor',
-            limpiarProveedor: 'limpiarProveedor'
-        }),
         ...mapActions('proveedores', {
             modalGuardarProveedor: 'modalGuardarProveedor',
             guardarProveedor: 'guardarProveedor',

@@ -72,26 +72,19 @@ export default {
     name: 'TablaTelas',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('telas', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('telas', {
             tela: state => state.tela,
             telas: state => state.telas,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
         }),
@@ -100,9 +93,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('telas', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('telas', {
             listarTelas: 'listarTelas',
             cambiarPaginaTelas: 'cambiarPaginaTelas',

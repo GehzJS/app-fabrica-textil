@@ -63,20 +63,12 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { ModeloService } from '@/services/ModeloService.js';
-
-const modeloService = new ModeloService();
 
 export default {
     name: 'ModalGuardarModelos',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // precio: '#?#?#?#.##',
-            // cantidad: '#?#?#?#?#',
-            // nombre: 'A?A?A?A?A?A?A?A?A?A?A?A?A?A?A?A?A?A?A?A?'
+            valido: true
         }
     },
     computed: {
@@ -84,11 +76,7 @@ export default {
             'modelo'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
-            nombre: state => state.nombre,
             cantidad: state => state.cantidad,
             precio: state => state.precio
         }),
@@ -101,10 +89,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('modelos', {
-            asignarModelo: 'asignarModelo',
-            limpiarModelo: 'limpiarModelo'
-        }),
         ...mapActions('modelos', {
             modalGuardarModelo: 'modalGuardarModelo',
             guardarModelo: 'guardarModelo',

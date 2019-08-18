@@ -46,27 +46,21 @@ export default {
     name: 'EmpleadoInicio',
     data() {
         return {
-            valido: true,
-            validar: true,
-            telefono: '###-###-####'
+            valido: true
         }
     },
     computed: {
         ...mapState('general', {
-            nombre: state => state.nombre,
             telefono: state => state.telefono
         }),
         ...mapFields('setup', [
-            'empleado',
+            'empleado'
         ]),
         ...mapState('setup', {
             cargos: state => state.cargos
         })
     },
     methods: {
-        ...mapMutations('setup', {
-            cambiarPagina: 'cambiarPagina'
-        }),
         ...mapActions('setup', {
             guardarEmpleado: 'guardarEmpleado'
         }),

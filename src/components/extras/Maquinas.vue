@@ -39,14 +39,6 @@
                     </template>
                     <span>Borrar</span>
                 </v-tooltip>
-                <!-- <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                        <v-btn icon x-small color="info" class="ml-0" v-on="on">
-                            <v-icon>visibility</v-icon>
-                        </v-btn>
-                    </template>
-                    <span>Ver detalles</span>
-                </v-tooltip> -->
             </template>
             <template v-slot:no-data>
                 <v-alert text prominent :value="true" type="info">

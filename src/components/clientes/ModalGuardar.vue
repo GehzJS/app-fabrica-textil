@@ -54,49 +54,27 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { ClienteService } from '@/services/ClienteService.js';
-
-const clienteService = new ClienteService();
 
 export default {
     name: 'ModalGuardarClientes',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: false,
-            // telefono: '###-###-####'
+            valido: true
         }
     },
     computed: {
         ...mapFields('clientes', [
-                'cliente',
-            ]
-            // {
-            //     cliente: 'cliente.cliente',
-            //     contrasena: 'cliente.contrasena',
-            //     rol: 'cliente.rol',
-            //     cliente: 'cliente.cliente_id'
-            // }
-        ),
+                'cliente'
+            ]),
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
-            nombre: state => state.nombre,
             telefono: state => state.telefono
         }),
         ...mapState('clientes', {
-            clientes: state => state.clientes,
-            cargos: state => state.cargos
+            clientes: state => state.clientes
         })
     },
     methods: {
-        ...mapMutations('clientes', {
-            asignarCliente: 'asignarCliente',
-            limpiarCliente: 'limpiarCliente'
-        }),
         ...mapActions('clientes', {
             modalGuardarCliente: 'modalGuardarCliente',
             guardarCliente: 'guardarCliente',

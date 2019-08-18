@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-navigation-drawer app fixed temporary right width="350px" v-model="navDerecha">
-            <v-toolbar absolute fixed color="primary">
+            <v-toolbar absolute dark fixed color="info">
                 <v-btn icon>
                     <v-icon>notifications</v-icon>
                 </v-btn>
@@ -51,25 +51,16 @@ export default {
             'navDerecha'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             notificaciones: state => state.notificaciones
         })
-        // ...mapState('navegacion', {
-        // navDerecha: state => state.navDerecha,
-        //     notificaciones: state => state.notificaciones
-        // })
     },
     methods: {
         ...mapMutations('general', {
-            borrarNotificaciones: 'borrarNotificaciones',
-            leerLocal: 'leerLocal',
+            borrarNotificaciones: 'borrarNotificaciones'
         }),
         ...mapActions('general', {
             borrarNotificacionLocal: 'borrarNotificacionLocal'
         })
-    },
-    created() {
-        this.leerLocal();
     }
 }
 </script>

@@ -22,9 +22,6 @@
                                             <v-flex xs6>
                                                 <v-text-field outlined rounded clearable v-model="tela.stock" label="Stock *" prepend-inner-icon="donut_small" hint="Ejemplo: 10.00 (Cantidad en metros)." v-validate="'required|decimal:2|min:1|max:5'" :counter="5" :error-messages="errors.collect('stock')" data-vv-name="stock" required></v-text-field>
                                             </v-flex>
-                                            <!-- <v-flex xs6>
-                                                <v-select outlined rounded :items="secciones" v-model="tela.seccion" label="Sección *" prepend-inner-icon="view_compact" v-validate="'required'" :error-messages="errors.collect('seccion')" data-vv-name="seccion" required></v-select>
-                                            </v-flex> -->
                                             <v-flex xs6>
                                                 <v-autocomplete outlined rounded v-model="tela.seccion" :items="secciones" item-text="nombre_seccion" item-value="nombre_seccion" label="Seccion *" prepend-inner-icon="view_compact" v-validate="'required'" :error-messages="errors.collect('seccion')" data-vv-name="seccion" required></v-autocomplete>
                                             </v-flex>
@@ -71,18 +68,12 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { TelaService } from '@/services/TelaService.js';
-
-const telaService = new TelaService();
 
 export default {
     name: 'ModalGuardarTelas',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // precio: '##.##'
+            valido: true
         }
     },
     computed: {
@@ -90,11 +81,7 @@ export default {
             'tela',
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
-            nombre: state => state.nombre,
             cantidad: state => state.cantidad,
             precio: state => state.precio
         }),
@@ -104,10 +91,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('telas', {
-            asignarTela: 'asignarTela',
-            limpiarTela: 'limpiarTela'
-        }),
         ...mapActions('telas', {
             modalGuardarTela: 'modalGuardarTela',
             guardarTela: 'guardarTela',

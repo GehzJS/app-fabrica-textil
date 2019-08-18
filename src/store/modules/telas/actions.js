@@ -48,8 +48,8 @@ export default {
         }
         commit('general/mostrarModalGuardar', { estado: estado.estado, boton: true }, { root: true });
     },
-    async modalEditarTela({ commit, dispatch }, datos) {
-        if (estado.estado) {
+    async modalEditarTela({ commit, getters, dispatch }, datos) {
+        if (datos.estado) {
             await dispatch('llenarSecciones');
             if (getters.numeroSecciones == 0) {
                 dispatch('modalRegistroSecciones');

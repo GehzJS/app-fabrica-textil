@@ -24,7 +24,7 @@
                         <v-list>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">person</v-icon>
+                                    <v-icon color="error">person</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -36,7 +36,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">security</v-icon>
+                                    <v-icon color="error">security</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -48,7 +48,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">how_to_reg</v-icon>
+                                    <v-icon color="error">how_to_reg</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -60,7 +60,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">date_range</v-icon>
+                                    <v-icon color="error">date_range</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -78,15 +78,11 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { UsuarioService } from '@/services/UsuarioService.js';
-
-const usuarioService = new UsuarioService();
 
 export default {
     name: 'ModalDetalleUsuarios',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal
         }),
         ...mapState('usuarios', {

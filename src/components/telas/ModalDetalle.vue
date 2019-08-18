@@ -24,7 +24,7 @@
                         <v-list>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">style</v-icon>
+                                    <v-icon color="error">style</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -36,7 +36,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">view_compact</v-icon>
+                                    <v-icon color="error">view_compact</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -48,7 +48,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">color_lens</v-icon>
+                                    <v-icon color="error">color_lens</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -60,7 +60,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">assignment</v-icon>
+                                    <v-icon color="error">assignment</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -72,7 +72,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">date_range</v-icon>
+                                    <v-icon color="error">date_range</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -90,15 +90,11 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { TelaService } from '@/services/TelaService.js';
-
-const telaService = new TelaService();
 
 export default {
     name: 'ModalDetalleTelas',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal
         }),
         ...mapState('telas', {

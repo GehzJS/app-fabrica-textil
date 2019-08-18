@@ -57,37 +57,20 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { EmpleadoService } from '@/services/EmpleadoService.js';
-
-const empleadoService = new EmpleadoService();
 
 export default {
     name: 'ModalGuardarEmpleados',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // telefono: '###-###-####'
+            valido: true
         }
     },
     computed: {
         ...mapFields('empleados', [
-                'empleado',
-            ]
-            // {
-            //     empleado: 'empleado.empleado',
-            //     contrasena: 'empleado.contrasena',
-            //     rol: 'empleado.rol',
-            //     empleado: 'empleado.empleado_id'
-            // }
-        ),
+                'empleado'
+            ]),
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
-            nombre: state => state.nombre,
             telefono: state => state.telefono
         }),
         ...mapState('empleados', {
@@ -96,10 +79,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('empleados', {
-            asignarEmpleado: 'asignarEmpleado',
-            limpiarEmpleado: 'limpiarEmpleado'
-        }),
         ...mapActions('empleados', {
             modalGuardarEmpleado: 'modalGuardarEmpleado',
             guardarEmpleado: 'guardarEmpleado',

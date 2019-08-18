@@ -69,26 +69,19 @@ export default {
     name: 'TablaEmpleados',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('empleados', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('empleados', {
             empleado: state => state.empleado,
             empleados: state => state.empleados,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
         }),
@@ -97,9 +90,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('empleados', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('empleados', {
             listarEmpleados: 'listarEmpleados',
             cambiarPaginaEmpleados: 'cambiarPaginaEmpleados',

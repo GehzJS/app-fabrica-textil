@@ -77,37 +77,24 @@ export default {
     name: 'TablaNominas',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('nominas', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('nominas', {
             nomina: state => state.nomina,
             nominas: state => state.nominas,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
-        }),
-        ...mapGetters('nominas', {
-            numeroRegistros: 'numeroRegistros',
         })
     },
     methods: {
-        ...mapMutations('nominas', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('nominas', {
             listarNominas: 'listarNominas',
             cambiarPaginaNominas: 'cambiarPaginaNominas',

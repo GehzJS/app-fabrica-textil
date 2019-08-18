@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-navigation-drawer app fixed temporary width="300px" v-model="navIzquierda">
-            <v-toolbar absolute fixed color="primary">
+            <v-toolbar absolute dark fixed color="info">
                 <v-btn icon>
                     <v-icon>apps</v-icon>
                 </v-btn>
@@ -30,6 +30,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
+
 export default {
     name: 'MenuLateral',
     computed: {
@@ -37,20 +38,8 @@ export default {
             'navIzquierda'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             secciones: state => state.secciones
-        }),
-        // ...mapState('navegacion', {
-        //     navIzquierda: state => state.navIzquierda
-        // })
-    },
-    methods: {
-        ...mapMutations('general', {
-            leerSecciones: 'leerSecciones'
         })
-    },
-    created() {
-        this.leerSecciones();
     }
 }
 </script>

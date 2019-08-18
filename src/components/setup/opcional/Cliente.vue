@@ -45,19 +45,15 @@ export default {
     name: 'ClienteInicio',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: false,
-            // telefono: '###-###-####'
+            valido: false
         }
     },
     computed: {
         ...mapState('general', {
-            nombre: state => state.nombre,
             telefono: state => state.telefono
         }),
         ...mapFields('setup', [
-            'cliente',
+            'cliente'
         ])
     },
     methods: {

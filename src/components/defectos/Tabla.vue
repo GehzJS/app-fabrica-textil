@@ -12,10 +12,6 @@
                         <v-icon left>note_add</v-icon>Nuevo defecto
                     </v-btn>
                     <v-spacer></v-spacer>
-                    <!-- <v-layout align-center justify-center fill-height column>
-                        <span class="caption">Buscar por:</span>
-                        <v-switch hide-details v-model="tipo" :label="tipo? 'Empleado' : 'Modelo'" color="info"></v-switch>
-                    </v-layout> -->
                     <v-text-field flat rounded solo-inverted hide-details label="Buscar por empleado" prepend-inner-icon="search" append-icon="loop" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarDefectoPorEmpleado(busqueda)" v-if="tipo == true"></v-text-field>
                     <v-text-field flat rounded solo-inverted hide-details label="Buscar por modelo" prepend-inner-icon="search" append-icon="autorenew" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarDefectoPorModelo(busqueda)" v-if="tipo == false"></v-text-field>
                 </v-toolbar>
@@ -74,38 +70,25 @@ export default {
     name: 'TablaDefectos',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: '',
-            tipo: true,
+            tipo: true
         }
     },
     computed: {
         ...mapFields('defectos', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('defectos', {
             defecto: state => state.defecto,
             defectos: state => state.defectos,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
-        }),
-        ...mapGetters('defectos', {
-            numeroRegistros: 'numeroRegistros',
         })
     },
     methods: {
-        ...mapMutations('defectos', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('defectos', {
             listarDefectos: 'listarDefectos',
             cambiarPaginaDefectos: 'cambiarPaginaDefectos',

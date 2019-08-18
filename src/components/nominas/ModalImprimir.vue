@@ -102,15 +102,11 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { NominaService } from '@/services/NominaService.js';
-
-const nominaService = new NominaService();
 
 export default {
     name: 'ModalImprimirNominas',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal
         }),
         ...mapState('nominas', {
@@ -128,8 +124,3 @@ export default {
     },
 }
 </script>
-<style>
-.v-sheet {
-    width: 100%;
-}
-</style>

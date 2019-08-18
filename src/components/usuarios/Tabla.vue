@@ -13,7 +13,6 @@
                     </v-btn>
                     <v-spacer></v-spacer>
                     <v-text-field flat rounded solo-inverted hide-details label="Buscar usuarios" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarUsuario(busqueda)"></v-text-field>
-                    <!-- <v-text-field flat rounded solo-inverted hide-details label="Buscar usuarios" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarUsuario(busqueda)"></v-text-field> -->
                 </v-toolbar>
             </template>
             <template v-slot:item.action="{ item }">
@@ -70,37 +69,27 @@ export default {
     name: 'TablaUsuarios',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('usuarios', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('usuarios', {
             usuario: state => state.usuario,
             usuarios: state => state.usuarios,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
         }),
         ...mapGetters('usuarios', {
-            numeroRegistros: 'numeroRegistros',
+            numeroRegistros: 'numeroRegistros'
         })
     },
     methods: {
-        ...mapMutations('usuarios', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('usuarios', {
             listarUsuarios: 'listarUsuarios',
             cambiarPaginaUsuarios: 'cambiarPaginaUsuarios',

@@ -18,10 +18,10 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn rounded large color="error" class="mr-3" @click="modalBorrarProveedor({estado: false})">
-                            <v-icon>reply</v-icon>Cancelar
+                            <v-icon left>reply</v-icon>Cancelar
                         </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarProveedor">
-                            <v-icon>delete</v-icon>Borrar
+                            <v-icon left>delete</v-icon>Borrar
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -36,29 +36,15 @@ export default {
     name: 'ModalBorrarProveedores',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
-            modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion
+            modal: state => state.modal
         }),
         ...mapState('proveedores', {
             proveedor: state => state.proveedor
         })
     },
     methods: {
-        ...mapMutations('proveedores', {
-            asignarProveedor: 'asignarProveedor',
-            limpiarProveedor: 'limpiarProveedor'
-        }),
         ...mapActions('proveedores', {
-            guardarNotificacionLocal: 'guardarNotificacionLocal',
-            listarProveedores: 'listarProveedores',
-            cambiarPaginaProveedores: 'cambiarPaginaProveedores',
-            buscarProveedor: 'buscarProveedor',
-            modalGuardarProveedor: 'modalGuardarProveedor',
-            modalEditarProveedor: 'modalEditarProveedor',
             modalBorrarProveedor: 'modalBorrarProveedor',
-            modalDetalleProveedor: 'modalDetalleProveedor',
             borrarProveedor: 'borrarProveedor'
         })
     },

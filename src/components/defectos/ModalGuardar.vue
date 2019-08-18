@@ -15,10 +15,10 @@
                             <v-form ref="form" v-model="valido" lazy-validation>
                                 <v-layout wrap>
                                     <v-flex xs6>
-                                        <v-autocomplete outlined rounded v-model="defecto.modelo_id" :items="modelos" item-text="nombreModelo" item-value="id" label="Modelo *" prepend-inner-icon="shopping_basket" v-validate="'required'" :error-messages="errors.collect('modelo')" data-vv-name="modelo" required></v-autocomplete>
+                                        <v-autocomplete outlined rounded v-model="defecto.modelo_id" :items="modelos" item-text="nombre_modelo" item-value="id" label="Modelo *" prepend-inner-icon="shopping_basket" v-validate="'required'" :error-messages="errors.collect('modelo')" data-vv-name="modelo" required></v-autocomplete>
                                     </v-flex>
                                     <v-flex xs6>
-                                        <v-autocomplete outlined rounded v-model="defecto.empleado_id" :items="empleados" item-text="nombreEmpleado" item-value="id" label="Empleado *" prepend-inner-icon="how_to_reg" v-validate="'required'" :error-messages="errors.collect('empleado')" data-vv-name="empleado" required></v-autocomplete>
+                                        <v-autocomplete outlined rounded v-model="defecto.empleado_id" :items="empleados" item-text="nombre_empleado" item-value="id" label="Empleado *" prepend-inner-icon="how_to_reg" v-validate="'required'" :error-messages="errors.collect('empleado')" data-vv-name="empleado" required></v-autocomplete>
                                     </v-flex>
                                     <v-flex xs5>
                                         <v-text-field outlined rounded clearable v-model="defecto.cantidad" label="Cantidad *" prepend-inner-icon="speaker_notes" hint="Ejemplo: 10 (Cantidad por defectos generados)." v-validate="'required|numeric|min:1|max:5'" :counter="5" :error-messages="errors.collect('cantidad')" data-vv-name="cantidad" required></v-text-field>
@@ -51,30 +51,20 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { DefectoService } from '@/services/DefectoService.js';
-
-const defectoService = new DefectoService();
 
 export default {
     name: 'ModalGuardarDefectos',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // precio: '##.##'
+            valido: true
         }
     },
     computed: {
         ...mapFields('defectos', [
-            'defecto',
+            'defecto'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
-            nombre: state => state.nombre,
             cantidad: state => state.cantidad
         }),
         ...mapState('defectos', {
@@ -84,10 +74,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('defectos', {
-            asignarDefecto: 'asignarDefecto',
-            limpiarDefecto: 'limpiarDefecto'
-        }),
         ...mapActions('defectos', {
             modalGuardarDefecto: 'modalGuardarDefecto',
             guardarDefecto: 'guardarDefecto',

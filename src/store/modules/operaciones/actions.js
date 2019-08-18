@@ -149,6 +149,18 @@ export default {
         }
         commit('general/mostrarCarga', { texto: '', estado: false }, { root: true });
     },
+    async llenarMaquinas({ commit, dispatch }) {
+        commit('general/mostrarCarga', { texto: 'Obteniendo información', estado: true }, { root: true });
+        let maquinas = await operacionService.obtenerMaquinas();
+        if (maquinas != null) {
+            for (let maquina of maquinas) {
+                commit('asignarMaquinas', { id: maquina.id, nombre: maquina.nombre });
+            }
+        } else {
+            dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+        }
+        commit('general/mostrarCarga', { texto: '', estado: false }, { root: true });
+    },
     async guardarOperacion({ state, commit, dispatch }) {
         commit('general/mostrarCarga', { texto: 'Guardando operacion', estado: true }, { root: true });
         commit('asignarTela');

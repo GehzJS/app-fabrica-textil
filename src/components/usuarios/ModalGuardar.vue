@@ -27,7 +27,7 @@
                                         <v-text-field outlined rounded clearable v-model="verificar" label="Confirmar contraseña *" :type="mostrar ? 'text' : 'password'" prepend-inner-icon="vpn_key" :append-icon="mostrar ? 'visibility' : 'visibility_off'" @click:append="mostrar = !mostrar" v-validate="'required|alpha_num|min:8|max:20'" :counter="20" :error-messages="errors.collect('confirmar_contrasena')" data-vv-name="confirmar_contrasena" required></v-text-field>
                                     </v-flex>
                                     <v-flex xs12>
-                                        <v-autocomplete outlined rounded v-model="usuario.empleado_id" :items="empleados" item-text="nombreEmpleado" item-value="id" label="Empleado asignado *" prepend-inner-icon="how_to_reg" v-validate="'required'" :error-messages="errors.collect('empleado')" data-vv-name="empleado" required></v-autocomplete>
+                                        <v-autocomplete outlined rounded v-model="usuario.empleado_id" :items="empleados" item-text="nombre_empleado" item-value="id" label="Empleado asignado *" prepend-inner-icon="how_to_reg" v-validate="'required'" :error-messages="errors.collect('empleado')" data-vv-name="empleado" required></v-autocomplete>
                                     </v-flex>
                                 </v-layout>
                                 <p class="body-2 font-weight-bold text-uppercase">( * ) Indica que el campo es requerido.</p>
@@ -54,9 +54,6 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { UsuarioService } from '@/services/UsuarioService.js';
-
-const usuarioService = new UsuarioService();
 
 export default {
     name: 'ModalGuardarUsuarios',
@@ -72,10 +69,7 @@ export default {
             'usuario',
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
-            modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion
+            modal: state => state.modal
         }),
         ...mapState('usuarios', {
             empleados: state => state.empleados,
@@ -83,10 +77,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('usuarios', {
-            asignarUsuario: 'asignarUsuario',
-            limpiarUsuario: 'limpiarUsuario'
-        }),
         ...mapActions('usuarios', {
             modalGuardarUsuario: 'modalGuardarUsuario',
             guardarUsuario: 'guardarUsuario',

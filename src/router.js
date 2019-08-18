@@ -124,6 +124,12 @@ export default new Router({
             name: "tipos",
             component: () =>
                 import ("./views/Tipos.vue")
+        },
+        {
+            path: "/perfil",
+            name: "perfil",
+            component: () =>
+                import ("./views/Perfil.vue")
         }
     ]
 });

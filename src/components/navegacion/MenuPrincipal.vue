@@ -1,6 +1,6 @@
 <template>
     <div>
-        <MenuLateral />
+        <MenuLateral/>
         <v-toolbar flat absolute fixed v-if="navegacion">
             <v-app-bar app fixed>
                 <v-tooltip bottom>
@@ -9,7 +9,7 @@
                     </template>
                     <span>Ver secciones</span>
                 </v-tooltip>
-                <v-toolbar-title>Be Sports & Activewear</v-toolbar-title>
+                <v-toolbar-title>App Inventario</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-autocomplete rounded flat solo-inverted hide-details clearable v-model="busqueda" :items="seccionesBusqueda" item-text="titulo" item-value="enlace" label="Buscar en la aplicacion" prepend-inner-icon="search" class="mx-5 hidden-sm-and-down" @change="redirigir(busqueda)"></v-autocomplete>
                 <v-spacer></v-spacer>
@@ -32,7 +32,7 @@
                 <v-tooltip bottom>
                     <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on" @click.stop="navDerecha = !navDerecha">
-                            <v-badge overlap color="pink lighten-1">
+                            <v-badge overlap color="error">
                                 <template v-slot:badge>
                                     <span v-if="total > 0">{{total}}</span>
                                 </template>
@@ -51,7 +51,7 @@
                         </v-btn>
                     </template>
                     <v-list>
-                        <v-list-item to="/">
+                        <v-list-item to="/perfil">
                             <v-list-item-title>Ver mi perfil</v-list-item-title>
                         </v-list-item>
                         <v-list-item to="/">
@@ -88,10 +88,8 @@ export default {
             'navDerecha'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             navegacion: state => state.navegacion,
-            seccionesBusqueda: state => state.seccionesBusqueda,
-            titulos: state => state.titulos
+            seccionesBusqueda: state => state.seccionesBusqueda
         }),
         ...mapGetters('general', {
             total: 'total'
@@ -104,9 +102,6 @@ export default {
             leerLocal: 'leerLocal',
         }),
         ...mapMutations('navegacion', {
-            // mostrarMenuLateral: 'mostrarMenuLateral',
-            // mostrarNotificaciones: 'mostrarNotificaciones',
-            // leerLocal: 'leerLocal',
             redirigir: 'redirigir'
         })
     },

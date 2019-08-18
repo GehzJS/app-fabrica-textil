@@ -13,7 +13,6 @@
                     </v-btn>
                     <v-spacer></v-spacer>
                     <v-text-field flat rounded solo-inverted hide-details label="Buscar por proveedor" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarAdquisicion(busqueda)"></v-text-field>
-                    <!-- <v-text-field flat rounded solo-inverted hide-details label="Buscar por tela" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarAdquisicion(busqueda)"></v-text-field> -->
                 </v-toolbar>
             </template>
             <template v-slot:item.action="{ item }">
@@ -78,37 +77,24 @@ export default {
     name: 'TablaAdquisiciones',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('adquisiciones', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('adquisiciones', {
             adquisicion: state => state.adquisicion,
             adquisiciones: state => state.adquisiciones,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
         }),
-        ...mapGetters('adquisiciones', {
-            numeroRegistros: 'numeroRegistros',
-        })
     },
     methods: {
-        ...mapMutations('adquisiciones', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('adquisiciones', {
             listarAdquisiciones: 'listarAdquisiciones',
             cambiarPaginaAdquisiciones: 'cambiarPaginaAdquisiciones',

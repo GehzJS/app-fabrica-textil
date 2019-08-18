@@ -45,19 +45,15 @@ export default {
     name: 'ProveedorInicio',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // telefono: '###-###-####'
+            valido: true
         }
     },
     computed: {
         ...mapState('general', {
-            nombre: state => state.nombre,
             telefono: state => state.telefono
         }),
         ...mapFields('setup', [
-            'proveedor',
+            'proveedor'
         ])
     },
     methods: {

@@ -34,7 +34,6 @@ export default {
     name: 'ModalRegistro',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal
         })
     },

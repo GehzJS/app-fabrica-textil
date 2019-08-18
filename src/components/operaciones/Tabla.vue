@@ -12,10 +12,6 @@
                         <v-icon left>note_add</v-icon>Nueva operación
                     </v-btn>
                     <v-spacer></v-spacer>
-                    <!-- <v-layout align-center justify-center fill-height column>
-                        <span class="caption">Buscar por:</span>
-                        <v-switch hide-details v-model="tipo" :label="tipo? 'Operación' : 'Modelo'" color="info"></v-switch>
-                    </v-layout> -->
                     <v-text-field flat rounded solo-inverted hide-details label="Buscar por operación" prepend-inner-icon="search" append-icon="loop" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarOperacion(busqueda)" v-if="tipo == true"></v-text-field>
                     <v-text-field flat rounded solo-inverted hide-details label="Buscar por modelo" prepend-inner-icon="search" append-icon="autorenew" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarOperacionPorModelo(busqueda)" v-if="tipo == false"></v-text-field>
                 </v-toolbar>
@@ -77,38 +73,25 @@ export default {
     name: 'TablaOperaciones',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: '',
             tipo: true
         }
     },
     computed: {
         ...mapFields('operaciones', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('operaciones', {
             operacion: state => state.operacion,
             operaciones: state => state.operaciones,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
-        }),
-        ...mapGetters('operaciones', {
-            numeroRegistros: 'numeroRegistros',
         })
     },
     methods: {
-        ...mapMutations('operaciones', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('operaciones', {
             listarOperaciones: 'listarOperaciones',
             cambiarPaginaOperaciones: 'cambiarPaginaOperaciones',

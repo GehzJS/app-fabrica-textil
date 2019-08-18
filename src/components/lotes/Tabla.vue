@@ -69,26 +69,19 @@ export default {
     name: 'TablaLotes',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('lotes', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('lotes', {
             lote: state => state.lote,
             lotes: state => state.lotes,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
         }),
@@ -97,9 +90,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('lotes', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('lotes', {
             listarLotes: 'listarLotes',
             cambiarPaginaLotes: 'cambiarPaginaLotes',

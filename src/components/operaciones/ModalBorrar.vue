@@ -18,10 +18,10 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn rounded large color="error" class="mr-3" @click="modalBorrarOperacion({estado: false})">
-                            <v-icon>reply</v-icon>Cancelar
+                            <v-icon left>reply</v-icon>Cancelar
                         </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarOperacion">
-                            <v-icon>delete</v-icon>Borrar
+                            <v-icon left>delete</v-icon>Borrar
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -36,29 +36,15 @@ export default {
     name: 'ModalBorrarOperaciones',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
-            modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion
+            modal: state => state.modal
         }),
         ...mapState('operaciones', {
             operacion: state => state.operacion
         })
     },
     methods: {
-        ...mapMutations('operaciones', {
-            asignarOperacion: 'asignarOperacion',
-            limpiarOperacion: 'limpiarOperacion'
-        }),
         ...mapActions('operaciones', {
-            guardarNotificacionLocal: 'guardarNotificacionLocal',
-            listarOperaciones: 'listarOperaciones',
-            cambiarPaginaOperaciones: 'cambiarPaginaOperaciones',
-            buscarOperacion: 'buscarOperacion',
-            modalGuardarOperacion: 'modalGuardarOperacion',
-            modalEditarOperacion: 'modalEditarOperacion',
             modalBorrarOperacion: 'modalBorrarOperacion',
-            modalDetalleOperacion: 'modalDetalleOperacion',
             borrarOperacion: 'borrarOperacion'
         })
     },

@@ -102,15 +102,11 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { AdquisicionService } from '@/services/AdquisicionService.js';
-
-const adquisicionService = new AdquisicionService();
 
 export default {
     name: 'ModalImprimirAdquisiciones',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal
         }),
         ...mapState('adquisiciones', {
@@ -128,8 +124,3 @@ export default {
     },
 }
 </script>
-<style>
-.v-sheet {
-    width: 100%;
-}
-</style>

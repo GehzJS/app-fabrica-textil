@@ -15,7 +15,7 @@
                             <v-form ref="form" v-model="valido" lazy-validation>
                                 <v-layout wrap>
                                     <v-flex xs6>
-                                        <v-autocomplete outlined rounded v-model="nomina.empleado_id" :items="empleados" item-text="nombreEmpleado" item-value="id" label="Empleado *" prepend-inner-icon="how_to_reg" v-validate="'required'" :error-messages="errors.collect('empleado')" data-vv-name="empleado" required></v-autocomplete>
+                                        <v-autocomplete outlined rounded v-model="nomina.empleado_id" :items="empleados" item-text="nombre_empleado" item-value="id" label="Empleado *" prepend-inner-icon="how_to_reg" v-validate="'required'" :error-messages="errors.collect('empleado')" data-vv-name="empleado" required></v-autocomplete>
                                     </v-flex>
                                     <v-flex xs6>
                                         <v-select outlined rounded :items="estados" item-text="estado" item-value="valor" v-model="nomina.estado" label="Estado *" prepend-inner-icon="assignment_late" v-validate="'required'" :error-messages="errors.collect('estado')" data-vv-name="estado" required></v-select>
@@ -51,16 +51,6 @@
                                             </template>
                                         </v-data-table>
                                         <v-data-table fixed-header hide-default-footer :headers="itemsTitulos" :items="nomina.items" height="22vh" v-if="modal.local == false">
-                                            <!-- <template v-slot:item.action="{ item }">
-                                                <v-tooltip bottom>
-                                                    <template v-slot:activator="{ on }">
-                                                        <v-btn icon x-small color="error" class="ml-0" @click="modalBorrarItem({item: item, estado: true, local: false})" v-on="on">
-                                                            <v-icon>delete</v-icon>
-                                                        </v-btn>
-                                                    </template>
-                                                    <span>Borrar</span>
-                                                </v-tooltip>
-                                            </template> -->
                                             <template v-slot:no-data>
                                                 <v-alert text prominent :value="true" type="info">
                                                     Esta factura aún no cuenta con ningún artículo. Agregue al menos uno para continuar.
@@ -99,15 +89,11 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { NominaService } from '@/services/NominaService.js';
-
-const nominaService = new NominaService();
 
 export default {
     name: 'ModalGuardarNominas',
     data() {
         return {
-            mostrar: false,
             valido: true
         }
     },
@@ -116,11 +102,7 @@ export default {
             'nomina',
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
-            nombre: state => state.nombre
         }),
         ...mapState('nominas', {
             empleados: state => state.empleados,
@@ -153,14 +135,9 @@ export default {
                 }
             });
         },
-        ...mapMutations('nominas', {
-            asignarNomina: 'asignarNomina',
-            limpiarNomina: 'limpiarNomina'
-        }),
         ...mapActions('nominas', {
             modalGuardarNomina: 'modalGuardarNomina',
             modalGuardarItem: 'modalGuardarItem',
-            modalEditarItem: 'modalEditarItem',
             modalBorrarItem: 'modalBorrarItem',
             guardarNomina: 'guardarNomina',
             editarNomina: 'editarNomina'

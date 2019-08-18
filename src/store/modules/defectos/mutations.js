@@ -35,13 +35,13 @@ export default {
     asignarModelos(state, payload) {
         state.modelos.push({
             id: payload.id,
-            nombreModelo: payload.nombre
+            nombre_modelo: payload.nombre
         });
     },
     asignarEmpleados(state, payload) {
         state.empleados.push({
             id: payload.id,
-            nombreEmpleado: payload.nombre
+            nombre_empleado: payload.nombre
         });
     }
 };

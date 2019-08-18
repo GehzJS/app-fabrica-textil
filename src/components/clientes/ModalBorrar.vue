@@ -18,10 +18,10 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn rounded large color="error" class="mr-3" @click="modalBorrarCliente({estado: false})">
-                            <v-icon>reply</v-icon>Cancelar
+                            <v-icon left>reply</v-icon>Cancelar
                         </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarCliente">
-                            <v-icon>delete</v-icon>Borrar
+                            <v-icon left>delete</v-icon>Borrar
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -36,29 +36,15 @@ export default {
     name: 'ModalBorrarClientes',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
-            modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion
+            modal: state => state.modal
         }),
         ...mapState('clientes', {
             cliente: state => state.cliente
         })
     },
     methods: {
-        ...mapMutations('clientes', {
-            asignarCliente: 'asignarCliente',
-            limpiarCliente: 'limpiarCliente'
-        }),
         ...mapActions('clientes', {
-            guardarNotificacionLocal: 'guardarNotificacionLocal',
-            listarClientes: 'listarClientes',
-            cambiarPaginaClientes: 'cambiarPaginaClientes',
-            buscarCliente: 'buscarCliente',
-            modalGuardarCliente: 'modalGuardarCliente',
-            modalEditarCliente: 'modalEditarCliente',
             modalBorrarCliente: 'modalBorrarCliente',
-            modalDetalleCliente: 'modalDetalleCliente',
             borrarCliente: 'borrarCliente'
         })
     },

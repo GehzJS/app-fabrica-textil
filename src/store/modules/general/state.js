@@ -5,7 +5,7 @@ let state = {
     precio: '#?#?#?#.##',
     cantidad: '#####',
     telefono: '###-###-####',
-    nombre: 'A?AAAAAAAAAAAAAAAAAAA',
+    nombre: 'AAAAAAAAAAAAAAAAAAAAA',
     seccionesBusqueda: [],
     titulos: [],
     notificaciones: [],
@@ -36,68 +36,57 @@ let state = {
     },
     fecha: '',
     secciones: [{
-            icono: 'local_activity',
-            titulo: 'Administrador',
-            items: [
-                { titulo: 'Gestión de empleados', icono: 'local_activity', enlace: 'empleados' },
-                { titulo: 'Gestión de usuarios', icono: 'local_activity', enlace: 'usuarios' },
-                { titulo: 'Gestión de modelos', icono: 'local_activity', enlace: 'modelos' },
-                { titulo: 'Cantidad por modelo', icono: 'local_activity', enlace: 'lotes' },
-                { titulo: 'Detalle de nómina', icono: 'local_activity', enlace: 'nominas' },
-                { titulo: 'Datos de la empresa', icono: 'local_activity', enlace: 'empresa' },
-                // { titulo: 'Mi cuenta', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Tutoriales', icono: 'local_activity', enlace: '/' }
-            ]
-        },
-        {
-            icono: 'local_activity',
-            titulo: 'Usuario',
-            items: [
-                { titulo: 'Mi cuenta', icono: 'local_activity', enlace: 'perfil' },
-                // { titulo: 'Tutoriales', icono: 'local_activity', enlace: '/' }
-            ]
-        },
-        {
-            icono: 'local_activity',
-            titulo: 'Corte',
-            items: [
-                { titulo: 'Listado de telas', icono: 'local_activity', enlace: 'telas' },
-                // { titulo: 'Gestión de secciones', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Inventario de telas', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Gestion de inventario', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Listado de colores', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Tutoriales', icono: 'local_activity', enlace: '/' }
-            ]
-        },
-        {
-            icono: 'local_activity',
-            titulo: 'Confección',
-            items: [
-                { titulo: 'Gestión de operaciones', icono: 'local_activity', enlace: 'operaciones' },
-                // { titulo: 'Gestión de máquinas', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Operaciones por modelo', icono: 'local_activity', enlace: '/modelos' },
-                { titulo: 'Gestión de defectos', icono: 'local_activity', enlace: 'defectos' },
-                { titulo: 'Nóminas', icono: 'local_activity', enlace: 'nominas' },
-                // { titulo: 'Tutoriales', icono: 'local_activity', enlace: '/' }
-            ]
-        },
-        {
-            icono: 'local_activity',
-            titulo: 'Terminado',
-            items: [
-                // { titulo: 'Seguimiento de modelo', icono: 'local_activity', enlace: '/' }
-            ]
-        },
-        {
-            icono: 'local_activity',
             titulo: 'Almacén',
+            icono: 'move_to_inbox',
             items: [
-                // { titulo: 'Tallas', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Tipo de producto', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Secciones', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Almacén de prendas', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Gestión de almacén', icono: 'local_activity', enlace: '/' },
-                // { titulo: 'Tutoriales', icono: 'local_activity', enlace: '/' }
+                { titulo: 'Modelos', icono: 'shopping_basket', enlace: 'modelos' },
+                { titulo: 'Telas', icono: 'style', enlace: 'telas' }
+            ]
+        },
+        {
+            titulo: 'Extras',
+            icono: 'extension',
+            items: [
+                { titulo: 'Maquinas', icono: 'settings_input_component', enlace: 'maquinas' },
+                { titulo: 'Materiales', icono: 'view_carousel', enlace: 'materiales' },
+                { titulo: 'Secciones', icono: 'view_compact', enlace: 'secciones' },
+                { titulo: 'Tallas', icono: 'dashboard', enlace: 'tallas' },
+                { titulo: 'Tipos', icono: 'bookmark', enlace: 'tipos' }
+            ]
+        },
+        {
+            titulo: 'Facturación',
+            icono: 'assignment_turned_in',
+            items: [
+                { titulo: 'Adquisiciones', icono: 'local_mall', enlace: 'adquisiciones' },
+                { titulo: 'Nóminas', icono: 'beenhere', enlace: 'nominas' },
+                { titulo: 'Ventas', icono: 'local_offer', enlace: 'ventas' }
+            ]
+        },
+        {
+            titulo: 'Personas',
+            icono: 'group_add',
+            items: [
+                { titulo: 'Clientes', icono: 'shopping_cart', enlace: 'clientes' },
+                { titulo: 'Empleados', icono: 'how_to_reg', enlace: 'empleados' },
+                { titulo: 'Proveedores', icono: 'local_shipping', enlace: 'proveedores' }
+            ]
+        },
+        {
+            titulo: 'Producción',
+            icono: 'category',
+            items: [
+                { titulo: 'Defectos', icono: 'notification_important', enlace: 'defectos' },
+                { titulo: 'Lotes', icono: 'vertical_split', enlace: 'lotes' },
+                { titulo: 'Operaciones', icono: 'dns', enlace: 'operaciones' }
+            ]
+        },
+        {
+            titulo: 'Usuarios',
+            icono: 'person_add',
+            items: [
+                { titulo: 'Perfil', icono: 'folder_shared', enlace: 'perfil' },
+                { titulo: 'Usuarios', icono: 'person', enlace: 'usuarios' }
             ]
         }
     ]

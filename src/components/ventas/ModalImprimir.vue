@@ -102,15 +102,11 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { VentaService } from '@/services/VentaService.js';
-
-const ventaService = new VentaService();
 
 export default {
     name: 'ModalImprimirVentaes',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal
         }),
         ...mapState('ventas', {
@@ -128,8 +124,3 @@ export default {
     },
 }
 </script>
-<style>
-.v-sheet {
-    width: 100%;
-}
-</style>

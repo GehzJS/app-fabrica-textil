@@ -69,27 +69,19 @@ export default {
     name: 'TablaClientes',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('clientes', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
-            // paginacion: state => state.paginacion,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('clientes', {
             cliente: state => state.cliente,
             clientes: state => state.clientes,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
         }),
@@ -98,9 +90,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('clientes', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('clientes', {
             listarClientes: 'listarClientes',
             cambiarPaginaClientes: 'cambiarPaginaClientes',

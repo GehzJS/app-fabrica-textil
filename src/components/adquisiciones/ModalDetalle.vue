@@ -24,7 +24,7 @@
                         <v-list>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">local_shipping</v-icon>
+                                    <v-icon color="error">local_shipping</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -36,7 +36,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">assignment_late</v-icon>
+                                    <v-icon color="error">assignment_late</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -48,7 +48,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">euro_symbol</v-icon>
+                                    <v-icon color="error">euro_symbol</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -60,7 +60,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">assignment</v-icon>
+                                    <v-icon color="error">assignment</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -72,7 +72,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">date_range</v-icon>
+                                    <v-icon color="error">date_range</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -84,7 +84,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">vertical_split</v-icon>
+                                    <v-icon color="error">vertical_split</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -126,15 +126,11 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { AdquisicionService } from '@/services/AdquisicionService.js';
-
-const adquisicionService = new AdquisicionService();
 
 export default {
     name: 'ModalDetalleAdquisiciones',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal
         }),
         ...mapState('adquisiciones', {

@@ -51,16 +51,6 @@
                                             </template>
                                         </v-data-table>
                                         <v-data-table fixed-header hide-default-footer :headers="itemsTitulos" :items="adquisicion.items" height="22vh" v-if="modal.local == false">
-                                            <!-- <template v-slot:item.action="{ item }">
-                                                <v-tooltip bottom>
-                                                    <template v-slot:activator="{ on }">
-                                                        <v-btn icon x-small color="error" class="ml-0" @click="modalBorrarItem({item: item, estado: true, local: false})" v-on="on">
-                                                            <v-icon>delete</v-icon>
-                                                        </v-btn>
-                                                    </template>
-                                                    <span>Borrar</span>
-                                                </v-tooltip>
-                                            </template> -->
                                             <template v-slot:no-data>
                                                 <v-alert text prominent :value="true" type="info">
                                                     Esta factura aún no cuenta con ningún artículo. Agregue al menos uno para continuar.
@@ -99,27 +89,20 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { AdquisicionService } from '@/services/AdquisicionService.js';
-
-const adquisicionService = new AdquisicionService();
 
 export default {
     name: 'ModalGuardarAdquisiciones',
     data() {
         return {
-            mostrar: false,
             valido: true
         }
     },
     computed: {
         ...mapFields('adquisiciones', [
-            'adquisicion',
+            'adquisicion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
             nombre: state => state.nombre
         }),
         ...mapState('adquisiciones', {
@@ -131,8 +114,7 @@ export default {
         ...mapGetters('adquisiciones', {
             total: 'total',
             totalLocal: 'totalLocal',
-            local: 'local',
-            numeroProveedores: 'numeroProveedores'
+            local: 'local'
         }),
         validarItems() {
             if (this.itemsAdquisiciones.length > 0) {
@@ -154,16 +136,10 @@ export default {
                 }
             });
         },
-        ...mapMutations('adquisiciones', {
-            asignarAdquisicion: 'asignarAdquisicion',
-            limpiarAdquisicion: 'limpiarAdquisicion'
-        }),
         ...mapActions('adquisiciones', {
             modalGuardarAdquisicion: 'modalGuardarAdquisicion',
             modalGuardarItem: 'modalGuardarItem',
-            modalEditarItem: 'modalEditarItem',
             modalBorrarItem: 'modalBorrarItem',
-            modalRegistroProveedores: 'modalRegistroProveedores',
             guardarAdquisicion: 'guardarAdquisicion',
             editarAdquisicion: 'editarAdquisicion'
         })

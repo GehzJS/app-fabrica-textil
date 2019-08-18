@@ -18,10 +18,10 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn rounded large color="error" class="mr-3" @click="modalBorrarUsuario({estado: false})">
-                            <v-icon>reply</v-icon>Cancelar
+                            <v-icon left>reply</v-icon>Cancelar
                         </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarUsuario">
-                            <v-icon>delete</v-icon>Borrar
+                            <v-icon left>delete</v-icon>Borrar
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -36,29 +36,15 @@ export default {
     name: 'ModalBorrarUsuarios',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
-            modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion
+            modal: state => state.modal
         }),
         ...mapState('usuarios', {
             usuario: state => state.usuario
         })
     },
     methods: {
-        ...mapMutations('usuarios', {
-            asignarUsuario: 'asignarUsuario',
-            limpiarUsuario: 'limpiarUsuario'
-        }),
         ...mapActions('usuarios', {
-            guardarNotificacionLocal: 'guardarNotificacionLocal',
-            listarUsuarios: 'listarUsuarios',
-            cambiarPaginaUsuarios: 'cambiarPaginaUsuarios',
-            buscarUsuario: 'buscarUsuario',
-            modalGuardarUsuario: 'modalGuardarUsuario',
-            modalEditarUsuario: 'modalEditarUsuario',
             modalBorrarUsuario: 'modalBorrarUsuario',
-            modalDetalleUsuario: 'modalDetalleUsuario',
             borrarUsuario: 'borrarUsuario'
         })
     },

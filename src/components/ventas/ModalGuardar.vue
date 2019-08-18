@@ -15,7 +15,7 @@
                             <v-form ref="form" v-model="valido" lazy-validation>
                                 <v-layout wrap>
                                     <v-flex xs6>
-                                        <v-autocomplete outlined rounded v-model="venta.cliente_id" :items="clientes" item-text="nombreCliente" item-value="id" label="Cliente *" prepend-inner-icon="shopping_cart" v-validate="'required'" :error-messages="errors.collect('cliente')" data-vv-name="cliente" required></v-autocomplete>
+                                        <v-autocomplete outlined rounded v-model="venta.cliente_id" :items="clientes" item-text="nombre_cliente" item-value="id" label="Cliente *" prepend-inner-icon="shopping_cart" v-validate="'required'" :error-messages="errors.collect('cliente')" data-vv-name="cliente" required></v-autocomplete>
                                     </v-flex>
                                     <v-flex xs6>
                                         <v-select outlined rounded :items="estados" item-text="estado" item-value="valor" v-model="venta.estado" label="Estado *" prepend-inner-icon="assignment_late" v-validate="'required'" :error-messages="errors.collect('estado')" data-vv-name="estado" required></v-select>
@@ -51,16 +51,6 @@
                                             </template>
                                         </v-data-table>
                                         <v-data-table fixed-header hide-default-footer :headers="itemsTitulos" :items="venta.items" height="22vh" class="text-capitalize" v-if="modal.local == false">
-                                            <!-- <template v-slot:item.action="{ item }">
-                                                <v-tooltip bottom>
-                                                    <template v-slot:activator="{ on }">
-                                                        <v-btn icon x-small color="error" class="ml-0" @click="modalBorrarItem({item: item, estado: true, local: false})" v-on="on">
-                                                            <v-icon>delete</v-icon>
-                                                        </v-btn>
-                                                    </template>
-                                                    <span>Borrar</span>
-                                                </v-tooltip>
-                                            </template> -->
                                             <template v-slot:no-data>
                                                 <v-alert text prominent :value="true" type="info">
                                                     Esta factura aún no cuenta con ningún artículo. Agregue al menos uno para continuar.
@@ -99,28 +89,20 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 import { mapFields } from 'vuex-map-fields';
-import { VentaService } from '@/services/VentaService.js';
-
-const ventaService = new VentaService();
 
 export default {
     name: 'ModalGuardarVentas',
     data() {
         return {
-            mostrar: false,
             valido: true
         }
     },
     computed: {
         ...mapFields('ventas', [
-            'venta',
+            'venta'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
-            modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion,
-            nombre: state => state.nombre
+            modal: state => state.modal
         }),
         ...mapState('ventas', {
             clientes: state => state.clientes,
@@ -153,14 +135,9 @@ export default {
                 }
             });
         },
-        ...mapMutations('ventas', {
-            asignarVenta: 'asignarVenta',
-            limpiarVenta: 'limpiarVenta'
-        }),
         ...mapActions('ventas', {
             modalGuardarVenta: 'modalGuardarVenta',
             modalGuardarItem: 'modalGuardarItem',
-            modalEditarItem: 'modalEditarItem',
             modalBorrarItem: 'modalBorrarItem',
             guardarVenta: 'guardarVenta',
             editarVenta: 'editarVenta'

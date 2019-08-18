@@ -43,7 +43,7 @@ export default {
     asignarClientes(state, payload) {
         state.clientes.push({
             id: payload.id,
-            nombreCliente: payload.nombre
+            nombre_cliente: payload.nombre
         });
     },
 

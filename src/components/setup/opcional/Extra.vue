@@ -42,16 +42,10 @@ export default {
     name: 'ModeloInicio',
     data() {
         return {
-            verificar: '',
-            mostrar: false,
-            valido: true,
-            // precio: '##.##'
+            valido: true
         }
     },
     computed: {
-        ...mapState('general', {
-            nombre: state => state.nombre,
-        }),
         ...mapFields('setup', [
             'modelo',
             'tela'

@@ -76,26 +76,19 @@ export default {
     name: 'TablaModelos',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('modelos', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('modelos', {
             modelo: state => state.modelo,
             modelos: state => state.modelos,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
         }),
@@ -104,9 +97,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('modelos', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('modelos', {
             listarModelos: 'listarModelos',
             cambiarPaginaModelos: 'cambiarPaginaModelos',

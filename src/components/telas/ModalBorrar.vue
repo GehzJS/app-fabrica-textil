@@ -18,10 +18,10 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn rounded large color="error" class="mr-3" @click="modalBorrarTela({estado: false})">
-                            <v-icon>reply</v-icon>Cancelar
+                            <v-icon left>reply</v-icon>Cancelar
                         </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarTela">
-                            <v-icon>delete</v-icon>Borrar
+                            <v-icon left>delete</v-icon>Borrar
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -36,29 +36,15 @@ export default {
     name: 'ModalBorrarTelas',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
-            modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion
+            modal: state => state.modal
         }),
         ...mapState('telas', {
             tela: state => state.tela
         })
     },
     methods: {
-        ...mapMutations('telas', {
-            asignarTela: 'asignarTela',
-            limpiarTela: 'limpiarTela'
-        }),
         ...mapActions('telas', {
-            guardarNotificacionLocal: 'guardarNotificacionLocal',
-            listarTelas: 'listarTelas',
-            cambiarPaginaTelas: 'cambiarPaginaTelas',
-            buscarTela: 'buscarTela',
-            modalGuardarTela: 'modalGuardarTela',
-            modalEditarTela: 'modalEditarTela',
             modalBorrarTela: 'modalBorrarTela',
-            modalDetalleTela: 'modalDetalleTela',
             borrarTela: 'borrarTela'
         })
     },

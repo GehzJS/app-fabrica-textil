@@ -69,26 +69,19 @@ export default {
     name: 'TablaProveedores',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('proveedores', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('proveedores', {
             proveedor: state => state.proveedor,
             proveedores: state => state.proveedores,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
         }),
@@ -97,9 +90,6 @@ export default {
         })
     },
     methods: {
-        ...mapMutations('proveedores', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('proveedores', {
             listarProveedores: 'listarProveedores',
             cambiarPaginaProveedores: 'cambiarPaginaProveedores',

@@ -46,16 +46,10 @@ export default {
     },
     computed: {
         ...mapFields('setup', [
-            'usuario',
-        ]),
-        ...mapState('setup', {
-            roles: state => state.roles
-        })
+            'usuario'
+        ])
     },
     methods: {
-        ...mapMutations('setup', {
-            cambiarPagina: 'cambiarPagina'
-        }),
         ...mapActions('setup', {
             guardarUsuario: 'guardarUsuario'
         }),

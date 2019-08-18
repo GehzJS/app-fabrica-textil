@@ -18,10 +18,10 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn rounded large color="error" class="mr-3" @click="modalBorrarLote({estado: false})">
-                            <v-icon>reply</v-icon>Cancelar
+                            <v-icon left>reply</v-icon>Cancelar
                         </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarLote">
-                            <v-icon>delete</v-icon>Borrar
+                            <v-icon left>delete</v-icon>Borrar
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -36,29 +36,15 @@ export default {
     name: 'ModalBorrarLotes',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
-            modal: state => state.modal,
-            carga: state => state.carga,
-            notificacion: state => state.notificacion
+            modal: state => state.modal
         }),
         ...mapState('lotes', {
             lote: state => state.lote
         })
     },
     methods: {
-        ...mapMutations('lotes', {
-            asignarLote: 'asignarLote',
-            limpiarLote: 'limpiarLote'
-        }),
         ...mapActions('lotes', {
-            guardarNotificacionLocal: 'guardarNotificacionLocal',
-            listarLotes: 'listarLotes',
-            cambiarPaginaLotes: 'cambiarPaginaLotes',
-            buscarLote: 'buscarLote',
-            modalGuardarLote: 'modalGuardarLote',
-            modalEditarLote: 'modalEditarLote',
             modalBorrarLote: 'modalBorrarLote',
-            modalDetalleLote: 'modalDetalleLote',
             borrarLote: 'borrarLote'
         })
     },

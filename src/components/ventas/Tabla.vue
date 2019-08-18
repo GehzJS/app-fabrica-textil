@@ -77,37 +77,24 @@ export default {
     name: 'TablaVentas',
     data() {
         return {
-            // paginacion: {
-            //     pagina: 1,
-            //     total: 10,
-            //     registros: 10
-            // },
             busqueda: ''
         }
     },
     computed: {
         ...mapFields('ventas', [
-            'paginacion',
+            'paginacion'
         ]),
         ...mapState('general', {
-            tema: state => state.tema,
             cargandoTabla: state => state.cargandoTabla
         }),
         ...mapState('ventas', {
             venta: state => state.venta,
             ventas: state => state.ventas,
-            // paginacion: state => state.paginacion,
             registros: state => state.registros,
             titulos: state => state.titulos
-        }),
-        ...mapGetters('ventas', {
-            numeroRegistros: 'numeroRegistros',
         })
     },
     methods: {
-        ...mapMutations('ventas', {
-            asignarPaginacion: 'asignarPaginacion'
-        }),
         ...mapActions('ventas', {
             listarVentas: 'listarVentas',
             cambiarPaginaVentas: 'cambiarPaginaVentas',

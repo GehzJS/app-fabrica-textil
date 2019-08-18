@@ -24,7 +24,7 @@
                         <v-list>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">shopping_basket</v-icon>
+                                    <v-icon color="error">shopping_basket</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -36,7 +36,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">speaker_notes</v-icon>
+                                    <v-icon color="error">speaker_notes</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -48,7 +48,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">assignment</v-icon>
+                                    <v-icon color="error">assignment</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -60,7 +60,7 @@
                             <v-divider inset></v-divider>
                             <v-list-item>
                                 <v-list-item-icon>
-                                    <v-icon color="secondary">date_range</v-icon>
+                                    <v-icon color="error">date_range</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
@@ -78,15 +78,11 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { LoteService } from '@/services/LoteService.js';
-
-const loteService = new LoteService();
 
 export default {
     name: 'ModalDetalleLotes',
     computed: {
         ...mapState('general', {
-            tema: state => state.tema,
             modal: state => state.modal
         }),
         ...mapState('lotes', {
