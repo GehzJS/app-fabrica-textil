@@ -55,9 +55,9 @@ export class TelaService {
      *   @param busqueda -> Datos introducidos por el tela.
      *   @return resultado -> Telas obtenidos tras la consulta.
      */
-    buscarTelas(busqueda) {
+    buscarTelas(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/telas/buscar/?search=${busqueda}`;
+        let URL = `${API_URL}/telas/buscar/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

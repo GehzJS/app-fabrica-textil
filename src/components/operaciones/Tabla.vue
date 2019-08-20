@@ -8,12 +8,45 @@
                     </v-btn>
                     <v-toolbar-title>Operaciones</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-btn rounded large color="info" @click="modalGuardarOperacion({estado: true})">
-                        <v-icon left>note_add</v-icon>Nueva operación
-                    </v-btn>
+                    <v-text-field flat rounded solo-inverted hide-details label="Buscar por operación" prepend-inner-icon="search" append-icon="loop" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarOperacion" v-if="tipo == true"></v-text-field>
+                    <v-text-field flat rounded solo-inverted hide-details label="Buscar por modelo" prepend-inner-icon="search" append-icon="autorenew" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarOperacionPorModelo" v-if="tipo == false"></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-text-field flat rounded solo-inverted hide-details label="Buscar por operación" prepend-inner-icon="search" append-icon="loop" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarOperacion(busqueda)" v-if="tipo == true"></v-text-field>
-                    <v-text-field flat rounded solo-inverted hide-details label="Buscar por modelo" prepend-inner-icon="search" append-icon="autorenew" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarOperacionPorModelo(busqueda)" v-if="tipo == false"></v-text-field>
+                    <v-menu offset-y :close-on-content-click="false">
+                        <template v-slot:activator="{ on:menu }">
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on:tooltip }">
+                                <v-btn icon v-on="{...tooltip, ...menu}" color="success"><v-icon>settings</v-icon></v-btn>
+                                </template>
+                                <span>Opciones</span>
+                            </v-tooltip>
+                        </template>
+                        <v-card>
+                            <v-container>
+                                <v-tabs grow color="info">
+                                    <v-tab v-if="tipo == true">Buscar por</v-tab>
+                                    <v-tab v-if="tipo == false">Buscar por</v-tab>
+                                    <v-tab-item v-if="tipo == true">
+                                        <v-radio-group v-model="columna_operacion">
+                                            <v-radio v-for="campo in campos_operacion" :key="campo.nombre" :label="campo.nombre" :value="campo.clave" color="success"></v-radio>
+                                        </v-radio-group>
+                                    </v-tab-item>
+                                    <v-tab-item v-if="tipo == false">
+                                        <v-radio-group v-model="columna_modelo">
+                                            <v-radio v-for="campo in campos_modelo" :key="campo.nombre" :label="campo.nombre" :value="campo.clave" color="success"></v-radio>
+                                        </v-radio-group>
+                                    </v-tab-item>
+                                </v-tabs>
+                            </v-container>
+                        </v-card>
+                    </v-menu>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" color="info" @click="modalGuardarOperacion({estado: true})">
+                                <v-icon>note_add</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Nueva operación</span>
+                    </v-tooltip>
                 </v-toolbar>
             </template>
             <template v-slot:item.action="{ item }">
@@ -73,13 +106,16 @@ export default {
     name: 'TablaOperaciones',
     data() {
         return {
-            busqueda: '',
+            // busqueda: '',
             tipo: true
         }
     },
     computed: {
         ...mapFields('operaciones', [
-            'paginacion'
+            'paginacion',
+            'busqueda',
+            'columna_operacion',
+            'columna_modelo'
         ]),
         ...mapState('general', {
             cargandoTabla: state => state.cargandoTabla
@@ -88,7 +124,9 @@ export default {
             operacion: state => state.operacion,
             operaciones: state => state.operaciones,
             registros: state => state.registros,
-            titulos: state => state.titulos
+            titulos: state => state.titulos,
+            campos_operacion: state => state.campos_operacion,
+            campos_modelo: state => state.campos_modelo
         })
     },
     methods: {

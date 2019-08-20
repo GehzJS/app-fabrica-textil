@@ -8,11 +8,38 @@
                     </v-btn>
                     <v-toolbar-title>Proveedores</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-btn rounded large color="info" @click="modalGuardarProveedor({estado: true})">
-                        <v-icon left>note_add</v-icon>Nuevo proveedor
-                    </v-btn>
+                    <v-text-field flat rounded solo-inverted hide-details label="Buscar proveedores" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarProveedor"></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-text-field flat rounded solo-inverted hide-details label="Buscar proveedores" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarProveedor(busqueda)"></v-text-field>
+                    <v-menu offset-y :close-on-content-click="false">
+                        <template v-slot:activator="{ on:menu }">
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on:tooltip }">
+                                <v-btn icon v-on="{...tooltip, ...menu}" color="success"><v-icon>settings</v-icon></v-btn>
+                                </template>
+                                <span>Opciones</span>
+                            </v-tooltip>
+                        </template>
+                        <v-card>
+                            <v-container>
+                                <v-tabs grow color="info">
+                                    <v-tab>Buscar por</v-tab>
+                                    <v-tab-item>
+                                        <v-radio-group v-model="columna">
+                                            <v-radio v-for="campo in campos" :key="campo.nombre" :label="campo.nombre" :value="campo.clave" color="success"></v-radio>
+                                        </v-radio-group>
+                                    </v-tab-item>
+                                </v-tabs>
+                            </v-container>
+                        </v-card>
+                    </v-menu>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" color="info" @click="modalGuardarProveedor({estado: true})">
+                                <v-icon>note_add</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Nuevo proveedor</span>
+                    </v-tooltip>
                 </v-toolbar>
             </template>
             <template v-slot:item.action="{ item }">
@@ -69,12 +96,14 @@ export default {
     name: 'TablaProveedores',
     data() {
         return {
-            busqueda: ''
+            // busqueda: ''
         }
     },
     computed: {
         ...mapFields('proveedores', [
-            'paginacion'
+            'paginacion',
+            'busqueda',
+            'columna'
         ]),
         ...mapState('general', {
             cargandoTabla: state => state.cargandoTabla
@@ -83,7 +112,8 @@ export default {
             proveedor: state => state.proveedor,
             proveedores: state => state.proveedores,
             registros: state => state.registros,
-            titulos: state => state.titulos
+            titulos: state => state.titulos,
+            campos: state => state.campos
         }),
         ...mapGetters('proveedores', {
             numeroRegistros: 'numeroRegistros',

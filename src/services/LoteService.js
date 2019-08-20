@@ -55,9 +55,9 @@ export class LoteService {
      *   @param busqueda -> Datos introducidos por el lote.
      *   @return resultado -> Lotes obtenidos tras la consulta.
      */
-    buscarLotes(busqueda) {
+    buscarLotes(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/lotes/buscar/?search=${busqueda}`;
+        let URL = `${API_URL}/lotes/buscar/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

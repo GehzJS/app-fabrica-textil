@@ -22,17 +22,17 @@ export default {
         commit('limpiarTelas');
         dispatch('listarTelas');
     },
-    async buscarTela({ state, commit, dispatch }, busqueda) {
+    async buscarTela({ state, commit, dispatch }) {
         commit('limpiarTelas');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarTelas');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await telaService.buscarTelas(busqueda);
+            let resultados = await telaService.buscarTelas(state.columna, state.busqueda);
             if (resultados != null) {
                 commit('asignarTelasBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

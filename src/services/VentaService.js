@@ -11,9 +11,9 @@ export class VentaService {
      *   @param pagina -> Número de página actual.
      *   @return ventas -> Ventas obtenidos por consulta.
      */
-    obtenerVentas(registros, pagina) {
+    obtenerVentas(registros, pagina, estado) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/ventas/filas/${registros}/?page=${pagina}`;
+        let URL = `${API_URL}/ventas/filas/${registros}/estado/${estado}/?page=${pagina}`;
         // Petición a la API y obtención del resultado.
         let ventas =
             axios.get(`${URL}`)
@@ -55,9 +55,9 @@ export class VentaService {
      *   @param busqueda -> Datos introducidos por el venta.
      *   @return resultado -> Ventas obtenidos tras la consulta.
      */
-    buscarVentas(busqueda) {
+    buscarVentas(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/ventas/buscar/?search=${busqueda}`;
+        let URL = `${API_URL}/ventas/buscar/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

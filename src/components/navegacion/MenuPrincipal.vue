@@ -9,7 +9,7 @@
                     </template>
                     <span>Ver secciones</span>
                 </v-tooltip>
-                <v-toolbar-title>App Inventario</v-toolbar-title>
+                <v-toolbar-title>App</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-autocomplete rounded flat solo-inverted hide-details clearable v-model="busqueda" :items="seccionesBusqueda" item-text="titulo" item-value="enlace" label="Buscar en la aplicacion" prepend-inner-icon="search" class="mx-5 hidden-sm-and-down" @change="redirigir(busqueda)"></v-autocomplete>
                 <v-spacer></v-spacer>
@@ -45,9 +45,7 @@
                 <v-menu offset-y>
                     <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
-                            <v-avatar size="32px" tile>
-                                <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
-                            </v-avatar>
+                            <v-icon>person</v-icon>
                         </v-btn>
                     </template>
                     <v-list>

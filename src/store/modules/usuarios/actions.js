@@ -6,7 +6,7 @@ const usuarioService = new UsuarioService();
 export default {
     async listarUsuarios({ state, commit, dispatch }) {
         commit('general/mostrarCarga', { texto: 'Obteniendo información', estado: true }, { root: true });
-        let usuarios = await usuarioService.obtenerUsuarios(state.paginacion.registros, state.paginacion.pagina);
+        let usuarios = await usuarioService.obtenerUsuarios(state.paginacion.registros, state.paginacion.pagina, state.rol);
         commit('limpiarUsuarios');
         if (usuarios != null) {
             commit('asignarPaginacion', { pagina: usuarios.current_page, total: usuarios.last_page, registros: state.paginacion.registros });
@@ -22,17 +22,32 @@ export default {
         commit('limpiarUsuarios');
         dispatch('listarUsuarios');
     },
-    async buscarUsuario({ state, commit, dispatch }, busqueda) {
+    async buscarUsuario({ state, commit, dispatch }) {
         commit('limpiarUsuarios');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarUsuarios');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await usuarioService.buscarUsuarios(busqueda);
+            let resultados = await usuarioService.buscarUsuarios(state.busqueda);
             if (resultados != null) {
                 commit('asignarUsuariosBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+            }
+            commit('general/mostrarCargaTabla', { estado: false }, { root: true });
+        }
+    },
+    async buscarUsuarioPorEmpleado({ state, commit, dispatch }) {
+        commit('limpiarUsuarios');
+        if (state.busqueda == '') {
+            dispatch('listarUsuarios');
+        } else {
+            commit('general/mostrarCargaTabla', { estado: true }, { root: true });
+            let resultados = await usuarioService.buscarUsuariosPorEmpleado(state.columna_empleado, state.busqueda);
+            if (resultados != null) {
+                commit('asignarUsuariosBusqueda', resultados.data);
+            } else {
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

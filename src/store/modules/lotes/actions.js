@@ -22,17 +22,17 @@ export default {
         commit('limpiarLotes');
         dispatch('listarLotes');
     },
-    async buscarLote({ state, commit, dispatch }, busqueda) {
+    async buscarLote({ state, commit, dispatch }) {
         commit('limpiarLotes');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarLotes');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await loteService.buscarLotes(busqueda);
+            let resultados = await loteService.buscarLotes(state.columna, state.busqueda);
             if (resultados != null) {
                 commit('asignarLotesBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

@@ -11,9 +11,9 @@ export class UsuarioService {
      *   @param pagina -> Número de página actual.
      *   @return usuarios -> Usuarios obtenidos por consulta.
      */
-    obtenerUsuarios(registros, pagina) {
+    obtenerUsuarios(registros, pagina, rol) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/usuarios/filas/${registros}/?page=${pagina}`;
+        let URL = `${API_URL}/usuarios/filas/${registros}/rol/${rol}/?page=${pagina}`;
         // Petición a la API y obtención del resultado.
         let usuarios =
             axios.get(`${URL}`)
@@ -57,7 +57,29 @@ export class UsuarioService {
      */
     buscarUsuarios(busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/usuarios/buscar/?search=${busqueda}`;
+        let URL = `${API_URL}/usuarios/buscar/usuario/?search=${busqueda}`;
+        // Petición a la API y obtención del resultado.
+        let resultado =
+            axios.post(`${URL}`)
+            .then(respuesta => {
+                if (respuesta.status == 200) {
+                    return respuesta.data;
+                } else {
+                    return null;
+                }
+            })
+            .catch(respuesta => respuesta.status);
+        // Retorno del resultado.
+        return resultado;
+    }
+
+    /*  Función para buscar usuarios por su nombre.
+     *   @param busqueda -> Datos introducidos por el usuario.
+     *   @return resultado -> Usuarios obtenidos tras la consulta.
+     */
+    buscarUsuariosPorEmpleado(campo, busqueda) {
+        // Ruta de la API a la que se va a realizar la petición.
+        let URL = `${API_URL}/usuarios/buscar/empleado/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

@@ -8,11 +8,38 @@
                     </v-btn>
                     <v-toolbar-title>Telas</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-btn rounded large color="info" @click="modalGuardarTela({estado: true})">
-                        <v-icon left>note_add</v-icon>Nueva tela
-                    </v-btn>
+                    <v-text-field flat rounded solo-inverted hide-details label="Buscar telas" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarTela"></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-text-field flat rounded solo-inverted hide-details label="Buscar telas" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarTela(busqueda)"></v-text-field>
+                    <v-menu offset-y :close-on-content-click="false">
+                        <template v-slot:activator="{ on:menu }">
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on:tooltip }">
+                                <v-btn icon v-on="{...tooltip, ...menu}" color="success"><v-icon>settings</v-icon></v-btn>
+                                </template>
+                                <span>Opciones</span>
+                            </v-tooltip>
+                        </template>
+                        <v-card>
+                            <v-container>
+                                <v-tabs grow color="info">
+                                    <v-tab>Buscar por</v-tab>
+                                    <v-tab-item>
+                                        <v-radio-group v-model="columna">
+                                            <v-radio v-for="campo in campos" :key="campo.nombre" :label="campo.nombre" :value="campo.clave" color="success"></v-radio>
+                                        </v-radio-group>
+                                    </v-tab-item>
+                                </v-tabs>
+                            </v-container>
+                        </v-card>
+                    </v-menu>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" color="info" @click="modalGuardarTela({estado: true})">
+                                <v-icon>note_add</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Nueva tela</span>
+                    </v-tooltip>
                 </v-toolbar>
             </template>
             <template v-slot:item.colores="{ item }">
@@ -72,12 +99,14 @@ export default {
     name: 'TablaTelas',
     data() {
         return {
-            busqueda: ''
+            // busqueda: ''
         }
     },
     computed: {
         ...mapFields('telas', [
-            'paginacion'
+            'paginacion',
+            'busqueda',
+            'columna'
         ]),
         ...mapState('general', {
             cargandoTabla: state => state.cargandoTabla
@@ -86,7 +115,8 @@ export default {
             tela: state => state.tela,
             telas: state => state.telas,
             registros: state => state.registros,
-            titulos: state => state.titulos
+            titulos: state => state.titulos,
+            campos: state => state.campos
         }),
         ...mapGetters('telas', {
             numeroRegistros: 'numeroRegistros',

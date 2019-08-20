@@ -11,9 +11,9 @@ export class NominaService {
      *   @param pagina -> Número de página actual.
      *   @return nominas -> Nominas obtenidos por consulta.
      */
-    obtenerNominas(registros, pagina) {
+    obtenerNominas(registros, pagina, estado) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/nominas/filas/${registros}/?page=${pagina}`;
+        let URL = `${API_URL}/nominas/filas/${registros}/estado/${estado}/?page=${pagina}`;
         // Petición a la API y obtención del resultado.
         let nominas =
             axios.get(`${URL}`)
@@ -55,9 +55,9 @@ export class NominaService {
      *   @param busqueda -> Datos introducidos por el nomina.
      *   @return resultado -> Nominas obtenidos tras la consulta.
      */
-    buscarNominas(busqueda) {
+    buscarNominas(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/nominas/buscar/?search=${busqueda}`;
+        let URL = `${API_URL}/nominas/buscar/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

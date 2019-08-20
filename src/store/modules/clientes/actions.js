@@ -22,17 +22,17 @@ export default {
         commit('limpiarClientes');
         dispatch('listarClientes');
     },
-    async buscarCliente({ state, commit, dispatch }, busqueda) {
+    async buscarCliente({ state, commit, dispatch }) {
         commit('limpiarClientes');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarClientes');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await clienteService.buscarClientes(busqueda);
+            let resultados = await clienteService.buscarClientes(state.columna, state.busqueda);
             if (resultados != null) {
                 commit('asignarClientesBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

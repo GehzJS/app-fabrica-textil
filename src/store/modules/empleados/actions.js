@@ -6,7 +6,7 @@ const empleadoService = new EmpleadoService();
 export default {
     async listarEmpleados({ state, commit, dispatch }) {
         commit('general/mostrarCarga', { texto: 'Obteniendo información', estado: true }, { root: true });
-        let empleados = await empleadoService.obtenerEmpleados(state.paginacion.registros, state.paginacion.pagina);
+        let empleados = await empleadoService.obtenerEmpleados(state.paginacion.registros, state.paginacion.pagina, state.cargo);
         commit('limpiarEmpleados');
         if (empleados != null) {
             commit('asignarPaginacion', { pagina: empleados.current_page, total: empleados.last_page, registros: state.paginacion.registros });
@@ -22,17 +22,17 @@ export default {
         commit('limpiarEmpleados');
         dispatch('listarEmpleados');
     },
-    async buscarEmpleado({ state, commit, dispatch }, busqueda) {
+    async buscarEmpleado({ state, commit, dispatch }) {
         commit('limpiarEmpleados');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarEmpleados');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await empleadoService.buscarEmpleados(busqueda);
+            let resultados = await empleadoService.buscarEmpleados(state.columna, state.busqueda);
             if (resultados != null) {
                 commit('asignarEmpleadosBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

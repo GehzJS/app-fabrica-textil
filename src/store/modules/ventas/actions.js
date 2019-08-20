@@ -8,7 +8,7 @@ const ventaItemService = new VentaItemService();
 export default {
     async listarVentas({ state, commit, dispatch }) {
         commit('general/mostrarCarga', { texto: 'Obteniendo información', estado: true }, { root: true });
-        let ventas = await ventaService.obtenerVentas(state.paginacion.registros, state.paginacion.pagina);
+        let ventas = await ventaService.obtenerVentas(state.paginacion.registros, state.paginacion.pagina, state.estado);
         commit('limpiarVentas');
         if (ventas != null) {
             commit('asignarPaginacion', { pagina: ventas.current_page, total: ventas.last_page, registros: state.paginacion.registros });
@@ -24,17 +24,17 @@ export default {
         commit('limpiarVentas');
         dispatch('listarVentas');
     },
-    async buscarVenta({ state, commit, dispatch }, busqueda) {
+    async buscarVenta({ state, commit, dispatch }) {
         commit('limpiarVentas');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarVentas');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await ventaService.buscarVentas(busqueda);
+            let resultados = await ventaService.buscarVentas(state.columna, state.busqueda);
             if (resultados != null) {
                 commit('asignarVentasBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

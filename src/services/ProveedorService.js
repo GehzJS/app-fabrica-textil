@@ -55,9 +55,9 @@ export class ProveedorService {
      *   @param busqueda -> Datos introducidos por el proveedor.
      *   @return resultado -> Proveedores obtenidos tras la consulta.
      */
-    buscarProveedores(busqueda) {
+    buscarProveedores(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/proveedores/buscar/?search=${busqueda}`;
+        let URL = `${API_URL}/proveedores/buscar/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

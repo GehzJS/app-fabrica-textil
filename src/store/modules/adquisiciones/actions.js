@@ -8,7 +8,7 @@ const adquisicionItemService = new AdquisicionItemService();
 export default {
     async listarAdquisiciones({ state, commit, dispatch }) {
         commit('general/mostrarCarga', { texto: 'Obteniendo información', estado: true }, { root: true });
-        let adquisiciones = await adquisicionService.obtenerAdquisiciones(state.paginacion.registros, state.paginacion.pagina);
+        let adquisiciones = await adquisicionService.obtenerAdquisiciones(state.paginacion.registros, state.paginacion.pagina, state.estado);
         commit('limpiarAdquisiciones');
         if (adquisiciones != null) {
             commit('asignarPaginacion', { pagina: adquisiciones.current_page, total: adquisiciones.last_page, registros: state.paginacion.registros });
@@ -24,17 +24,17 @@ export default {
         commit('limpiarAdquisiciones');
         dispatch('listarAdquisiciones');
     },
-    async buscarAdquisicion({ state, commit, dispatch }, busqueda) {
+    async buscarAdquisicion({ state, commit, dispatch }) {
         commit('limpiarAdquisiciones');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarAdquisiciones');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await adquisicionService.buscarAdquisiciones(busqueda);
+            let resultados = await adquisicionService.buscarAdquisiciones(state.columna, state.busqueda);
             if (resultados != null) {
                 commit('asignarAdquisicionesBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

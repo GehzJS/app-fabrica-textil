@@ -22,17 +22,17 @@ export default {
         commit('limpiarModelos');
         dispatch('listarModelos');
     },
-    async buscarModelo({ state, commit, dispatch }, busqueda) {
+    async buscarModelo({ state, commit, dispatch }) {
         commit('limpiarModelos');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarModelos');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await modeloService.buscarModelos(busqueda);
+            let resultados = await modeloService.buscarModelos(state.columna, state.busqueda);
             if (resultados != null) {
                 commit('asignarModelosBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

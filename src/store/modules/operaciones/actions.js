@@ -22,32 +22,32 @@ export default {
         commit('limpiarOperaciones');
         dispatch('listarOperaciones');
     },
-    async buscarOperacion({ state, commit, dispatch }, busqueda) {
+    async buscarOperacion({ state, commit, dispatch }) {
         commit('limpiarOperaciones');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarOperaciones');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await operacionService.buscarOperaciones(busqueda);
+            let resultados = await operacionService.buscarOperaciones(state.columna_operacion, state.busqueda);
             if (resultados != null) {
                 commit('asignarOperacionesBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }
     },
-    async buscarOperacionPorModelo({ state, commit, dispatch }, busqueda) {
+    async buscarOperacionPorModelo({ state, commit, dispatch }) {
         commit('limpiarOperaciones');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarOperaciones');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await operacionService.buscarOperacionesPorModelo(busqueda);
+            let resultados = await operacionService.buscarOperacionesPorModelo(state.columna_modelo, state.busqueda);
             if (resultados != null) {
                 commit('asignarOperacionesBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

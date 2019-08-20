@@ -3,20 +3,17 @@
         <v-layout row justify-center>
             <v-dialog v-model="modal.detalle" fullscreen hide-overlay transition="dialog-bottom-transition">
                 <v-card class="mx-auto">
-                    <v-img src="https://cdn.vuetifyjs.com/images/lists/ali.png" height="300px">
+                    <v-img src="../../assets/portadas/ventas.png" height="300px">
                         <v-layout column fill-height>
                             <v-card-title>
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on }">
-                                        <v-btn icon @click="modalDetalleVenta({venta: null, estado: false})" v-on="on">
+                                        <v-btn fab dark color="grey darken-4" @click="modalDetalleVenta({venta: null, estado: false})" v-on="on">
                                             <v-icon>chevron_left</v-icon>
                                         </v-btn>
                                     </template>
                                     <span>Regresar</span>
                                 </v-tooltip>
-                            </v-card-title>
-                            <v-card-title class="white--text pl-7 pt-12">
-                                <div class="display-1 pl-7 pt-12">Venta {{venta.id}}</div>
                             </v-card-title>
                         </v-layout>
                     </v-img>
@@ -107,7 +104,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr v-for="item in venta.items" :key="item.id">
-                                                        <td>{{ item.modelo_id }}</td>
+                                                        <td>{{ item.modelo }}</td>
                                                         <td>{{ item.cantidad }}</td>
                                                         <td>{{ item.precio }}</td>
                                                     </tr>

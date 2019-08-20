@@ -8,7 +8,7 @@ const nominaItemService = new NominaItemService();
 export default {
     async listarNominas({ state, commit, dispatch }) {
         commit('general/mostrarCarga', { texto: 'Obteniendo información', estado: true }, { root: true });
-        let nominas = await nominaService.obtenerNominas(state.paginacion.registros, state.paginacion.pagina);
+        let nominas = await nominaService.obtenerNominas(state.paginacion.registros, state.paginacion.pagina, state.estado);
         commit('limpiarNominas');
         if (nominas != null) {
             commit('asignarPaginacion', { pagina: nominas.current_page, total: nominas.last_page, registros: state.paginacion.registros });
@@ -24,17 +24,17 @@ export default {
         commit('limpiarNominas');
         dispatch('listarNominas');
     },
-    async buscarNomina({ state, commit, dispatch }, busqueda) {
+    async buscarNomina({ state, commit, dispatch }) {
         commit('limpiarNominas');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarNominas');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await nominaService.buscarNominas(busqueda);
+            let resultados = await nominaService.buscarNominas(state.columna, state.busqueda);
             if (resultados != null) {
                 commit('asignarNominasBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }
@@ -213,7 +213,6 @@ export default {
         if (operaciones != null) {
             for (let operacion of operaciones) {
                 commit('asignarOperaciones', operacion);
-                console.log(operacion);
             }
         } else {
             dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });

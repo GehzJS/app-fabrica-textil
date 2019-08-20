@@ -55,9 +55,9 @@ export class ModeloService {
      *   @param busqueda -> Datos introducidos por el modelo.
      *   @return resultado -> Modelos obtenidos tras la consulta.
      */
-    buscarModelos(busqueda) {
+    buscarModelos(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/modelos/buscar/?search=${busqueda}`;
+        let URL = `${API_URL}/modelos/buscar/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

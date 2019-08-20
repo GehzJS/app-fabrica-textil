@@ -22,17 +22,17 @@ export default {
         commit('limpiarProveedores');
         dispatch('listarProveedores');
     },
-    async buscarProveedor({ state, commit, dispatch }, busqueda) {
+    async buscarProveedor({ state, commit, dispatch }) {
         commit('limpiarProveedores');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarProveedores');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await proveedorService.buscarProveedores(busqueda);
+            let resultados = await proveedorService.buscarProveedores(state.columna, state.busqueda);
             if (resultados != null) {
                 commit('asignarProveedoresBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }

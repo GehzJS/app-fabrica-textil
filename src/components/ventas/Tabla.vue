@@ -8,11 +8,44 @@
                     </v-btn>
                     <v-toolbar-title>Ventas</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-btn rounded large color="info" @click="modalGuardarVenta({estado: true, local: true})">
-                        <v-icon left>note_add</v-icon>Nueva venta
-                    </v-btn>
+                    <v-text-field flat rounded solo-inverted hide-details label="Buscar por cliente" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarVenta"></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-text-field flat rounded solo-inverted hide-details label="Buscar por cliente" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarVenta(busqueda)"></v-text-field>
+                    <v-menu offset-y :close-on-content-click="false">
+                        <template v-slot:activator="{ on:menu }">
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on:tooltip }">
+                                <v-btn icon v-on="{...tooltip, ...menu}" color="success"><v-icon>settings</v-icon></v-btn>
+                                </template>
+                                <span>Opciones</span>
+                            </v-tooltip>
+                        </template>
+                        <v-card>
+                            <v-container>
+                                <v-tabs grow color="info">
+                                    <v-tab>Buscar por</v-tab>
+                                    <v-tab>Listar solo</v-tab>
+                                    <v-tab-item>
+                                        <v-radio-group v-model="columna">
+                                            <v-radio v-for="campo in campos" :key="campo.nombre" :label="campo.nombre" :value="campo.clave" color="success"></v-radio>
+                                        </v-radio-group>
+                                    </v-tab-item>
+                                    <v-tab-item>
+                                        <v-radio-group v-model="estado" @change="listarVentas">
+                                            <v-radio v-for="lista in listado" :key="lista.nombre" :label="lista.nombre" :value="lista.clave" color="success"></v-radio>
+                                        </v-radio-group>
+                                    </v-tab-item>
+                                </v-tabs>
+                            </v-container>
+                        </v-card>
+                    </v-menu>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" color="info" @click="modalGuardarVenta({estado: true, local: true})">
+                                <v-icon>note_add</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Nueva venta</span>
+                    </v-tooltip>
                 </v-toolbar>
             </template>
             <template v-slot:item.action="{ item }">
@@ -77,12 +110,15 @@ export default {
     name: 'TablaVentas',
     data() {
         return {
-            busqueda: ''
+            // busqueda: ''
         }
     },
     computed: {
         ...mapFields('ventas', [
-            'paginacion'
+            'paginacion',
+            'busqueda',
+            'columna',
+            'estado'
         ]),
         ...mapState('general', {
             cargandoTabla: state => state.cargandoTabla
@@ -91,7 +127,9 @@ export default {
             venta: state => state.venta,
             ventas: state => state.ventas,
             registros: state => state.registros,
-            titulos: state => state.titulos
+            titulos: state => state.titulos,
+            campos: state => state.campos,
+            listado: state => state.listado
         })
     },
     methods: {

@@ -55,9 +55,9 @@ export class DefectoService {
      *   @param busqueda -> Datos introducidos por el defecto.
      *   @return resultado -> Defectos obtenidos tras la consulta.
      */
-    buscarDefectosPorEmpleado(busqueda) {
+    buscarDefectosPorEmpleado(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/defectos/buscar/empleado/?search=${busqueda}`;
+        let URL = `${API_URL}/defectos/buscar/empleado/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)
@@ -77,9 +77,9 @@ export class DefectoService {
      *   @param busqueda -> Datos introducidos por el defecto.
      *   @return resultado -> Defectos obtenidos tras la consulta.
      */
-    buscarDefectosPorModelo(busqueda) {
+    buscarDefectosPorModelo(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/defectos/buscar/modelo/?search=${busqueda}`;
+        let URL = `${API_URL}/defectos/buscar/modelo/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

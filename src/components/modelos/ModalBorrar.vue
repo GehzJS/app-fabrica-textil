@@ -17,11 +17,11 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn rounded large color="error" class="mr-3" @click="modalBorrarModelo({estado: false})">
-                            <v-icon left>reply</v-icon>Cancelar
-                        </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarModelo">
                             <v-icon left>delete</v-icon>Borrar
+                        </v-btn>
+                        <v-btn rounded large color="error" class="mr-3" @click="modalBorrarModelo({estado: false})">
+                            <v-icon left>reply</v-icon>Cancelar
                         </v-btn>
                     </v-card-actions>
                 </v-card>

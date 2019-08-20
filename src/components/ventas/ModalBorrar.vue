@@ -17,26 +17,26 @@
                     </v-card-text>
                     <v-card-actions v-if="modal.local == false">
                         <v-spacer></v-spacer>
-                        <v-btn rounded large color="error" class="mr-3" @click="modalBorrarVenta({estado: false})" v-if="modal.item == false">
-                            <v-icon left>reply</v-icon>Cancelar
-                        </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarVenta" v-if="modal.item == false">
                             <v-icon left>delete</v-icon>Borrar
-                        </v-btn>
-                        <v-btn rounded large color="error" class="mr-3" @click="modalBorrarItem({estado: false})" v-if="modal.item == true">
-                            <v-icon left>reply</v-icon>Cancelar
                         </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarRegistroItem" v-if="modal.item == true">
                             <v-icon left>delete</v-icon>Borrar
                         </v-btn>
+                        <v-btn rounded large color="error" class="mr-3" @click="modalBorrarVenta({estado: false})" v-if="modal.item == false">
+                            <v-icon left>reply</v-icon>Cancelar
+                        </v-btn>
+                        <v-btn rounded large color="error" class="mr-3" @click="modalBorrarItem({estado: false})" v-if="modal.item == true">
+                            <v-icon left>reply</v-icon>Cancelar
+                        </v-btn>
                     </v-card-actions>
                     <v-card-actions v-if="modal.local == true">
                         <v-spacer></v-spacer>
-                        <v-btn rounded large color="error" class="mr-3" @click="modalBorrarItem({estado: false})">
-                            <v-icon left>reply</v-icon>Cancelar
-                        </v-btn>
                         <v-btn rounded large color="success" class="mr-3" @click="borrarRegistroItem">
                             <v-icon left>delete</v-icon>Borrar
+                        </v-btn>
+                        <v-btn rounded large color="error" class="mr-3" @click="modalBorrarItem({estado: false})">
+                            <v-icon left>reply</v-icon>Cancelar
                         </v-btn>
                     </v-card-actions>
                 </v-card>

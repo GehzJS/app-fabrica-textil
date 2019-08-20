@@ -55,9 +55,9 @@ export class OperacionService {
      *   @param busqueda -> Datos introducidos por el operacion.
      *   @return resultado -> Operaciones obtenidos tras la consulta.
      */
-    buscarOperaciones(busqueda) {
+    buscarOperaciones(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/operaciones/buscar/operacion/?search=${busqueda}`;
+        let URL = `${API_URL}/operaciones/buscar/operacion/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)
@@ -77,9 +77,9 @@ export class OperacionService {
      *   @param busqueda -> Datos introducidos por el operacion.
      *   @return resultado -> Operaciones obtenidos tras la consulta.
      */
-    buscarOperacionesPorModelo(busqueda) {
+    buscarOperacionesPorModelo(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/operaciones/buscar/modelo/?search=${busqueda}`;
+        let URL = `${API_URL}/operaciones/buscar/modelo/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

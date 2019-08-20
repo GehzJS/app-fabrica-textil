@@ -55,9 +55,9 @@ export class ClienteService {
      *   @param busqueda -> Datos introducidos por el cliente.
      *   @return resultado -> Clientes obtenidos tras la consulta.
      */
-    buscarClientes(busqueda) {
+    buscarClientes(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/clientes/buscar/?search=${busqueda}`;
+        let URL = `${API_URL}/clientes/buscar/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

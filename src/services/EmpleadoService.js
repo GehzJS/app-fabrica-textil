@@ -11,9 +11,9 @@ export class EmpleadoService {
      *   @param pagina -> Número de página actual.
      *   @return empleados -> Empleados obtenidos por consulta.
      */
-    obtenerEmpleados(registros, pagina) {
+    obtenerEmpleados(registros, pagina, cargo) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/empleados/filas/${registros}/?page=${pagina}`;
+        let URL = `${API_URL}/empleados/filas/${registros}/cargo/${cargo}/?page=${pagina}`;
         // Petición a la API y obtención del resultado.
         let empleados =
             axios.get(`${URL}`)
@@ -55,9 +55,9 @@ export class EmpleadoService {
      *   @param busqueda -> Datos introducidos por el empleado.
      *   @return resultado -> Empleados obtenidos tras la consulta.
      */
-    buscarEmpleados(busqueda) {
+    buscarEmpleados(campo, busqueda) {
         // Ruta de la API a la que se va a realizar la petición.
-        let URL = `${API_URL}/empleados/buscar/?search=${busqueda}`;
+        let URL = `${API_URL}/empleados/buscar/${campo}/?search=${busqueda}`;
         // Petición a la API y obtención del resultado.
         let resultado =
             axios.post(`${URL}`)

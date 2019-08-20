@@ -8,11 +8,51 @@
                     </v-btn>
                     <v-toolbar-title>Usuarios</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-btn rounded large color="info" @click="modalGuardarUsuario({estado: true})">
-                        <v-icon left>note_add</v-icon>Nuevo usuario
-                    </v-btn>
+                    <v-text-field flat rounded solo-inverted hide-details label="Buscar por usuario" prepend-inner-icon="search" append-icon="loop" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarUsuario" v-if="tipo == true"></v-text-field>
+                    <v-text-field flat rounded solo-inverted hide-details label="Buscar por empleado" prepend-inner-icon="search" append-icon="autorenew" @click:append="tipo = !tipo" v-model="busqueda" @keyup="buscarUsuarioPorEmpleado" v-if="tipo == false"></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-text-field flat rounded solo-inverted hide-details label="Buscar usuarios" prepend-inner-icon="search" v-model="busqueda" @keyup="buscarUsuario(busqueda)"></v-text-field>
+                    <v-menu offset-y :close-on-content-click="false">
+                        <template v-slot:activator="{ on:menu }">
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on:tooltip }">
+                                <v-btn icon v-on="{...tooltip, ...menu}" color="success"><v-icon>settings</v-icon></v-btn>
+                                </template>
+                                <span>Opciones</span>
+                            </v-tooltip>
+                        </template>
+                        <v-card>
+                            <v-container>
+                                <v-tabs grow color="info">
+                                    <v-tab v-if="tipo == true">Buscar por</v-tab>
+                                    <v-tab v-if="tipo == false">Buscar por</v-tab>
+                                    <v-tab>Listar solo</v-tab>
+                                    <v-tab-item v-if="tipo == true">
+                                        <v-radio-group v-model="columna_usuario">
+                                            <v-radio v-for="campo in campos_usuario" :key="campo.nombre" :label="campo.nombre" :value="campo.clave" color="success"></v-radio>
+                                        </v-radio-group>
+                                    </v-tab-item>
+                                    <v-tab-item v-if="tipo == false">
+                                        <v-radio-group v-model="columna_empleado">
+                                            <v-radio v-for="campo in campos_empleado" :key="campo.nombre" :label="campo.nombre" :value="campo.clave" color="success"></v-radio>
+                                        </v-radio-group>
+                                    </v-tab-item>
+                                    <v-tab-item>
+                                        <v-radio-group v-model="rol" @change="listarUsuarios">
+                                            <v-radio v-for="lista in listado" :key="lista.nombre" :label="lista.nombre" :value="lista.clave" color="success"></v-radio>
+                                        </v-radio-group>
+                                    </v-tab-item>
+                                </v-tabs>
+                            </v-container>
+                        </v-card>
+                    </v-menu>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" color="info" @click="modalGuardarUsuario({estado: true})">
+                                <v-icon>note_add</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Nuevo usuario</span>
+                    </v-tooltip>
                 </v-toolbar>
             </template>
             <template v-slot:item.action="{ item }">
@@ -69,12 +109,17 @@ export default {
     name: 'TablaUsuarios',
     data() {
         return {
-            busqueda: ''
+            // busqueda: ''
+            tipo: true
         }
     },
     computed: {
         ...mapFields('usuarios', [
-            'paginacion'
+            'paginacion',
+            'busqueda',
+            'columna_usuario',
+            'columna_empleado',
+            'rol'
         ]),
         ...mapState('general', {
             cargandoTabla: state => state.cargandoTabla
@@ -83,7 +128,10 @@ export default {
             usuario: state => state.usuario,
             usuarios: state => state.usuarios,
             registros: state => state.registros,
-            titulos: state => state.titulos
+            titulos: state => state.titulos,
+            campos_usuario: state => state.campos_usuario,
+            campos_empleado: state => state.campos_empleado,
+            listado: state => state.listado
         }),
         ...mapGetters('usuarios', {
             numeroRegistros: 'numeroRegistros'
@@ -94,6 +142,7 @@ export default {
             listarUsuarios: 'listarUsuarios',
             cambiarPaginaUsuarios: 'cambiarPaginaUsuarios',
             buscarUsuario: 'buscarUsuario',
+            buscarUsuarioPorEmpleado: 'buscarUsuarioPorEmpleado',
             modalGuardarUsuario: 'modalGuardarUsuario',
             modalEditarUsuario: 'modalEditarUsuario',
             modalBorrarUsuario: 'modalBorrarUsuario',

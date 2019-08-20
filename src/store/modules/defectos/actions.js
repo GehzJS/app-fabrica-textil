@@ -22,33 +22,33 @@ export default {
         commit('limpiarDefectos');
         dispatch('listarDefectos');
     },
-    async buscarDefectoPorEmpleado({ state, commit, dispatch }, busqueda) {
+    async buscarDefectoPorEmpleado({ state, commit, dispatch }) {
         commit('limpiarDefectos');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarDefectos');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await defectoService.buscarDefectosPorEmpleado(busqueda);
+            let resultados = await defectoService.buscarDefectosPorEmpleado(state.columna_empleado, state.busqueda);
             if (resultados != null) {
                 commit('asignarDefectosBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }
     },
 
-    async buscarDefectoPorModelo({ state, commit, dispatch }, busqueda) {
+    async buscarDefectoPorModelo({ state, commit, dispatch }) {
         commit('limpiarDefectos');
-        if (busqueda == '') {
+        if (state.busqueda == '') {
             dispatch('listarDefectos');
         } else {
             commit('general/mostrarCargaTabla', { estado: true }, { root: true });
-            let resultados = await defectoService.buscarDefectosPorModelo(busqueda);
+            let resultados = await defectoService.buscarDefectosPorModelo(state.columna_modelo, state.busqueda);
             if (resultados != null) {
                 commit('asignarDefectosBusqueda', resultados.data);
             } else {
-                dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
+                // dispatch('general/generarNotificacion', { texto: 'Ha ocurrido un error al conectarse con la base de datos.', tipo: 'error', estado: true }, { root: true });
             }
             commit('general/mostrarCargaTabla', { estado: false }, { root: true });
         }
