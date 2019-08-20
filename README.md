@@ -1,4 +1,4 @@
-# app-inventario
+# App Fábrica Textil (beta)
 
 ## Project setup
 ```
