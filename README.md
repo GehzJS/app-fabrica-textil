@@ -1,4 +1,5 @@
-# App Fábrica Textil (beta)
+# App Fábrica Textil (deprecated)
+# (WIP) Migrandose a VueJS 3
 
 ## Project setup
 ```
